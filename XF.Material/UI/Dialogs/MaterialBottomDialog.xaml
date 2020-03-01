@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dialogs:BaseMaterialModalPage
+    xmlns:dialogs="clr-namespace:XF.Material.Forms.UI.Dialogs"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI"
+             mc:Ignorable="d"
+             HasSystemPadding="False"
+             x:Class="XF.Material.UI.Dialogs.MaterialBottomDialog">
+
+    <ContentPage.Content>
+
+        <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
+
+            <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" ExtendedCornerRadius="12,12,0,0" Margin="0" Padding="0" BackgroundColor="White">
+                <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="Transparent">
+
+                    <!--Хедер диалога-->
+                    <StackLayout x:Name="Header" Margin="21,16,21,16" Orientation="Horizontal">
+
+                        <ui:MaterialLabel x:Name="Title" 
+                                        VerticalOptions="Center"
+                                        LineHeight="1"
+                                        TextColor="Black"
+                                        FontSize="18">
+                            <ui:MaterialLabel.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android" Value="sans-serif-medium" />
+                                </OnPlatform>
+                            </ui:MaterialLabel.FontFamily>
+                        </ui:MaterialLabel>
+
+                        <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{StaticResource IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+
+                            <ui:MaterialIcon  
+                                WidthRequest="24" 
+                                HeightRequest="24"
+                                Source="ic_close_24dp" 
+                                TintColor="{StaticResource IconTint}" />
+
+                        </ui:MaterialCard>
+
+                    </StackLayout>
+
+
+                    <!--Внутренний контент диалога-->
+                    <ui:MaterialCard x:Name="Content" Elevation="0" HasShadow="False" CornerRadius="0" Padding="24,2,24,2" Margin="0">
+                    </ui:MaterialCard>
+
+
+                    <!--Нижняя кнопка подтверждения-->
+                    <!--<ui:MaterialButton x:Name="ActionButton" ButtonType="Flat" Margin="18,6,18,16" BackgroundColor="#00ceb0"/>-->
+                    <ui:MaterialCard x:Name="ActionButton" IsClickable="True" Margin="23,12,23,16" CornerRadius="6" Elevation="0" HasShadow="False" Padding="18,15" BackgroundColor="{StaticResource AccentAlt}">
+                        <StackLayout>
+                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" Padding="1" TypeScale="Button" TextColor="White"/>
+                            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" WidthRequest="21" HeightRequest="21" Margin="0" IsRunning="true" Color="White" />
+                        </StackLayout>
+                    </ui:MaterialCard>
+
+
+                    <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
+                    <StackLayout x:Name="systemPadding">
+                        <StackLayout.BackgroundColor>
+                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="{StaticResource IconBackground}" />
+                        </StackLayout.BackgroundColor>
+                    </StackLayout>
+
+                </StackLayout>
+            </ui:MaterialCard>
+        </ScrollView>
+
+    </ContentPage.Content>
+</dialogs:BaseMaterialModalPage>

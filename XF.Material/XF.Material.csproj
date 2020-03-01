@@ -119,8 +119,23 @@
   <ItemGroup>
     <PackageReference Include="Rg.Plugins.Popup" Version="1.2.0.223" />
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
-    <PackageReference Include="Xamarin.Forms" Version="4.2.0.815419" />
+    <PackageReference Include="Xamarin.Forms" Version="4.4.0.991757" />
     <PackageReference Include="Com.Airbnb.Xamarin.Forms.Lottie" Version="3.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="UI\Dialogs\MaterialBottomMenuDialog.xaml.cs">
+      <DependentUpon>MaterialBottomMenuDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="UI\MaterialDivider.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="UI\Dialogs\MaterialBottomDialog.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   
 </Project>

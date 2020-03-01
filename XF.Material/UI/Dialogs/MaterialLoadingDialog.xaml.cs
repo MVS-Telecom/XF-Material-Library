@@ -21,7 +21,7 @@ namespace XF.Material.Forms.UI.Dialogs
             InitializeComponent();
             Configure(configuration);
             Message.Text = message;
-            LoadingImage.Animation = lottieAnimation;
+            //LoadingImage.Animation = lottieAnimation;
         }
 
         public override bool Dismissable => false;
@@ -54,7 +54,7 @@ namespace XF.Material.Forms.UI.Dialogs
         {
             base.OnAppearing();
 
-            LoadingImage.Play();
+            //LoadingImage.Play();
 
             ChangeLayout();
         }
@@ -95,7 +95,7 @@ namespace XF.Material.Forms.UI.Dialogs
             Container.BackgroundColor = preferredConfig.BackgroundColor;
             Message.TextColor = preferredConfig.MessageTextColor;
             Message.FontFamily = preferredConfig.MessageFontFamily;
-            LoadingImage.TintColor = preferredConfig.TintColor;
+            LoadingImage.Color = preferredConfig.TintColor;
             Container.Margin = preferredConfig.Margin == default ? Material.GetResource<Thickness>("Material.Dialog.Margin") : preferredConfig.Margin;
         }
     }

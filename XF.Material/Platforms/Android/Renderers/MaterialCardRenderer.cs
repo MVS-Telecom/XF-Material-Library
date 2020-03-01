@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using Android.Content;
+using Android.Graphics;
 using Android.Graphics.Drawables;
 using Android.Util;
 using Android.Views;
@@ -15,11 +16,20 @@ namespace XF.Material.Droid.Renderers
 {
     public class MaterialCardRenderer : Xamarin.Forms.Platform.Android.AppCompat.FrameRenderer, IOnTouchListener
     {
+        private Bitmap maskBitmap;
+        private Paint paint, maskPaint;
         private MaterialCard _materialCard;
 
         public MaterialCardRenderer(Context context) : base(context)
         {
+            paint = new Paint(PaintFlags.AntiAlias);
+
+            maskPaint = new Paint(PaintFlags.AntiAlias | PaintFlags.FilterBitmap);
+            maskPaint.SetXfermode(new PorterDuffXfermode(PorterDuff.Mode.Clear));
+
+            SetWillNotDraw(false);
         }
+
 
         public bool OnTouch(Android.Views.View v, MotionEvent e)
         {
@@ -55,6 +65,7 @@ namespace XF.Material.Droid.Renderers
             _materialCard = Element as MaterialCard;
 
             UpdateStrokeColor();
+            UpdateCornerRadiaus();
             Control.Elevate(_materialCard.Elevation);
             SetClickable();
             Control.SetOnTouchListener(this);
@@ -75,6 +86,9 @@ namespace XF.Material.Droid.Renderers
                 case nameof(Frame.BackgroundColor):
                     UpdateStrokeColor();
                     break;
+                case nameof(MaterialCard.ExtendedCornerRadius):
+                    UpdateCornerRadiaus();
+                    break;
             }
         }
 
@@ -91,6 +105,78 @@ namespace XF.Material.Droid.Renderers
 
             Control.Focusable = clickable;
             Control.Clickable = clickable;
+        }
+
+
+        protected override void DispatchDraw(Canvas canvas)
+        {
+            base.DispatchDraw(canvas);
+
+            var card = Element as MaterialCard;
+
+            if (card != null && card.CornerRadius == 0)
+            {
+                var cornerRadius = card.ExtendedCornerRadius;
+                var path = new Path();
+
+                var topLeftCorner = Context.ToPixels(cornerRadius.TopLeft);
+                var topRightCorner = Context.ToPixels(cornerRadius.TopRight);
+                var bottomLeftCorner = Context.ToPixels(cornerRadius.BottomLeft);
+                var bottomRightCorner = Context.ToPixels(cornerRadius.BottomRight);
+
+                var cornerRadii = new[]
+                {
+                    topLeftCorner,
+                    topLeftCorner,
+
+                    topRightCorner,
+                    topRightCorner,
+
+                    bottomRightCorner,
+                    bottomRightCorner,
+
+                    bottomLeftCorner,
+                    bottomLeftCorner,
+                };
+
+                path.AddRoundRect(new RectF(0, 0, Width, Height), cornerRadii, Path.Direction.Cw);
+
+                canvas.ClipPath(path);
+            }
+        }
+
+
+        private void UpdateCornerRadiaus()
+        {
+            var drawable = (GradientDrawable)Control.Background;
+            var card = Element as MaterialCard;
+
+            if (card != null && card.CornerRadius == 0)
+            {
+                var cornerRadius = card.ExtendedCornerRadius;
+
+                var topLeftCorner = Context.ToPixels(cornerRadius.TopLeft);
+                var topRightCorner = Context.ToPixels(cornerRadius.TopRight);
+                var bottomLeftCorner = Context.ToPixels(cornerRadius.BottomLeft);
+                var bottomRightCorner = Context.ToPixels(cornerRadius.BottomRight);
+
+                var cornerRadii = new[]
+                {
+                    topLeftCorner,
+                    topLeftCorner,
+
+                    topRightCorner,
+                    topRightCorner,
+
+                    bottomRightCorner,
+                    bottomRightCorner,
+
+                    bottomLeftCorner,
+                    bottomLeftCorner,
+                };
+
+                drawable.SetCornerRadii(cornerRadii);
+            }
         }
 
         private void UpdateStrokeColor()

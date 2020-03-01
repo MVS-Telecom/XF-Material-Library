@@ -84,7 +84,7 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty HelperTextProperty = BindableProperty.Create(nameof(HelperText), typeof(string), typeof(MaterialTextField), string.Empty);
 
-        public static readonly BindableProperty HorizontalPaddingProperty = BindableProperty.Create(nameof(HorizontalPadding), typeof(MaterialHorizontalThickness), typeof(MaterialTextField), new MaterialHorizontalThickness(12d), defaultBindingMode: BindingMode.OneTime);
+        public static readonly BindableProperty HorizontalPaddingProperty = BindableProperty.Create(nameof(HorizontalPadding), typeof(MaterialHorizontalThickness), typeof(MaterialTextField), new MaterialHorizontalThickness(0), defaultBindingMode: BindingMode.OneTime);
 
         public static readonly BindableProperty InputTypeProperty = BindableProperty.Create(nameof(InputType), typeof(MaterialTextFieldInputType), typeof(MaterialTextField), MaterialTextFieldInputType.Default);
 
@@ -1375,6 +1375,7 @@ namespace XF.Material.Forms.UI
                 { nameof(BackgroundColor), () => OnBackgroundColorChanged(BackgroundColor) },
                 { nameof(AlwaysShowUnderline), () => OnAlwaysShowUnderlineChanged(AlwaysShowUnderline) },
                 { nameof(MaxLength), () => OnMaxLengthChanged(MaxLength, IsMaxLengthCounterVisible) },
+                { nameof(IsMaxLengthCounterVisible), () => OnMaxLengthChanged(MaxLength, IsMaxLengthCounterVisible) },
                 { nameof(ReturnCommand), () => OnReturnCommandChanged(ReturnCommand) },
                 { nameof(ReturnCommandParameter), () => OnReturnCommandParameterChanged(ReturnCommandParameter) },
                 { nameof(ReturnType), () => OnReturnTypeChangedd(ReturnType) },

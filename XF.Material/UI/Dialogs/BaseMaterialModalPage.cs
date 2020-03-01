@@ -142,24 +142,10 @@ namespace XF.Material.Forms.UI.Dialogs
         /// </summary>
         protected virtual async Task ShowAsync()
         {
-            if (CanShowPopup())
-            {
-                await PopupNavigation.Instance.PushAsync(this, true);
-            }
-            else
-            {
-                await DismissAsync();
-            }
+            await PopupNavigation.Instance.PushAsync(this, true);
         }
 
-        private bool CanShowPopup()
-        {
-            return !PopupNavigation
-                .Instance
-                .PopupStack
-                .ToList()
-                .Exists(p => p.GetType() == GetType());
-        }
+
 
         private void DeviceDisplay_MainDisplayInfoChanged(object sender, DisplayInfoChangedEventArgs e)
         {

@@ -26,12 +26,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <material:MaterialCircularLoadingView x:Name="LoadingImage"
-                                                      Grid.Column="0"
-                                                      HeightRequest="56"
-                                                      Loop="True"
-                                                      VerticalOptions="Center"
-                                                      WidthRequest="56" />
+
+                <ActivityIndicator x:Name="LoadingImage" 
+                                   IsRunning="true"
+                                   Grid.Column="0"
+                                   HeightRequest="34"
+                                   VerticalOptions="Center"
+                                   Color="{StaticResource Material.Color.Primary}"
+                                   WidthRequest="34" />
+                
                 <material:MaterialLabel x:Name="Message"
                                         Grid.Column="1"
                                         Text="Lorem ipsum dolor sit amet."

@@ -27,6 +27,11 @@ namespace XF.Material.Forms.UI
         public static readonly BindableProperty ElevationProperty = BindableProperty.Create(nameof(Elevation), typeof(int), typeof(MaterialCard), 1);
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static readonly BindableProperty ExtendedCornerRadiusProperty = BindableProperty.Create(nameof(ExtendedCornerRadius), typeof(CornerRadius), typeof(MaterialCard), null);
+
+        /// <summary>
         /// Backing field for the bindable property <see cref="IsClickable"/>.
         /// </summary>
         public static readonly BindableProperty IsClickableProperty = BindableProperty.Create(nameof(IsClickable), typeof(bool), typeof(MaterialCard), false);
@@ -71,6 +76,16 @@ namespace XF.Material.Forms.UI
         {
             get => (int)GetValue(ElevationProperty);
             set => SetValue(ElevationProperty, value);
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public CornerRadius ExtendedCornerRadius
+        {
+            get => (CornerRadius)GetValue(ExtendedCornerRadiusProperty);
+            set => SetValue(ExtendedCornerRadiusProperty, value);
         }
 
         /// <summary>

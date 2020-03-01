@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<dialogs:BaseMaterialModalPage
+    xmlns:dialogs="clr-namespace:XF.Material.Forms.UI.Dialogs"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI"
+             mc:Ignorable="d"
+             x:Class="XF.Material.UI.Dialogs.MaterialBottomMenuDialog">
+
+    <ContentPage.Content>
+
+        <ui:MaterialCard HasShadow="False" Elevation="0" ExtendedCornerRadius="14,14,0,0" BackgroundColor="Transparent">
+            <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="White">
+
+                <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="White">
+
+
+                    <!--START: iPhone home bar support-->
+                    <StackLayout.Padding>
+                        <OnPlatform x:TypeArguments="Thickness" iOS="0,0,0,26" Android="0" />
+                    </StackLayout.Padding>
+                    <!--END: iPhone home bar support-->
+
+
+                    <!--Хедер диалога-->
+                    <StackLayout x:Name="Header" Margin="21,16,21,16" Orientation="Horizontal">
+
+                        <ui:MaterialLabel x:Name="Title" 
+                                        VerticalOptions="Center"
+                                        TextColor="Black"
+                                        FontSize="18">
+                            <ui:MaterialLabel.FontFamily>
+                                <OnPlatform x:TypeArguments="x:String">
+                                    <On Platform="Android" Value="sans-serif-medium" />
+                                </OnPlatform>
+                            </ui:MaterialLabel.FontFamily>
+                        </ui:MaterialLabel>
+
+                        <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{StaticResource IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+
+                            <ui:MaterialIcon  
+                            WidthRequest="24" 
+                            HeightRequest="24"
+                            Source="ic_close_24dp" 
+                            TintColor="{StaticResource IconTint}" />
+
+                        </ui:MaterialCard>
+
+                    </StackLayout>
+
+
+                    <!--Внутренний контент диалога-->
+                    <ui:MaterialCard x:Name="Content" Elevation="0" HasShadow="False" CornerRadius="0" Padding="0" Margin="0">
+                    </ui:MaterialCard>
+
+                </StackLayout>
+            </ScrollView>
+        </ui:MaterialCard>
+    </ContentPage.Content>
+</dialogs:BaseMaterialModalPage>
