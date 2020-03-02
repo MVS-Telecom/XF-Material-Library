@@ -54,7 +54,7 @@
                     <!--<ui:MaterialButton x:Name="ActionButton" ButtonType="Flat" Margin="18,6,18,16" BackgroundColor="#00ceb0"/>-->
                     <ui:MaterialCard x:Name="ActionButton" IsClickable="True" Margin="23,12,23,16" CornerRadius="6" Elevation="0" HasShadow="False" Padding="18,15" BackgroundColor="{StaticResource AccentAlt}">
                         <StackLayout>
-                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" Padding="1" TypeScale="Button" TextColor="White"/>
+                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center"  Padding="1" TypeScale="Button" TextColor="White"/>
                             <ActivityIndicator x:Name="activityIndicator" IsVisible="False" WidthRequest="21" HeightRequest="21" Margin="0" IsRunning="true" Color="White" />
                         </StackLayout>
                     </ui:MaterialCard>
