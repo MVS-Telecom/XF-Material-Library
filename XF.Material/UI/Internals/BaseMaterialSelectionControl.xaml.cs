@@ -117,6 +117,11 @@ namespace XF.Material.Forms.UI.Internals
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool IgnoreNextChange { get; set; } = false;
+
+        /// <summary>
         /// Gets or sets the command that will execute when this selection control was selected or not.
         /// </summary>
         public Command<bool> SelectedChangeCommand
@@ -206,7 +211,12 @@ namespace XF.Material.Forms.UI.Internals
         {
             selectionIcon.Source = isSelected ? _selectedSource : _unselectedSource;
             selectionIcon.TintColor = isSelected ? SelectedColor : UnselectedColor;
-            SelectedChanged?.Invoke(this, new SelectedChangedEventArgs(isSelected));
+
+            if (!IgnoreNextChange)
+                SelectedChanged?.Invoke(this, new SelectedChangedEventArgs(isSelected));
+
+            IgnoreNextChange = false;
+
             SelectedChangeCommand?.Execute(isSelected);
         }
 

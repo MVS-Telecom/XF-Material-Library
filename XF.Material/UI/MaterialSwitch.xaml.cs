@@ -64,9 +64,15 @@ namespace XF.Material.Forms.UI
             set => SetValue(IsActivatedProperty, value);
         }
 
+
+        public bool IgnoreNextChange { get; set; }
+
         protected virtual void OnActivatedChanged(bool isActivated)
         {
-            Activated?.Invoke(this, new ActivatedEventArgs(IsActivated));
+            if (!IgnoreNextChange)
+                Activated?.Invoke(this, new ActivatedEventArgs(IsActivated));
+
+            IgnoreNextChange = false;
 
             Device.BeginInvokeOnMainThread(async () => await AnimateSwitchAsync(IsActivated));
         }
