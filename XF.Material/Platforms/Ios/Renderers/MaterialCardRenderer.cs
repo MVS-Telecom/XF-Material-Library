@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel;
+using CoreAnimation;
+using CoreGraphics;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
@@ -16,6 +18,7 @@ namespace XF.Material.iOS.Renderers
         private UIColor _rippleColor;
         private UITapGestureRecognizer _rippleGestureRecognizerDelegate = null;
 
+
         protected override void OnElementChanged(ElementChangedEventArgs<Frame> e)
         {
             base.OnElementChanged(e);
@@ -24,6 +27,7 @@ namespace XF.Material.iOS.Renderers
             {
                 return;
             }
+
 
             _materialCard = Element as MaterialCard;
             if (_materialCard != null)
@@ -34,6 +38,55 @@ namespace XF.Material.iOS.Renderers
             SetupColors();
             SetIsClickable();
         }
+
+        private CGRect frame;
+
+        public override CGRect Frame
+        {
+            get
+            {
+                return base.Frame;
+            }
+            set
+            {
+                base.Frame = value;
+
+                if (frame != value)
+                {
+                    frame = value;
+                    DrawRoundCorners();
+                }
+            }
+        }
+
+        private void DrawRoundCorners()
+        {
+            var card = Element as MaterialCard;
+
+            if (card == null)
+                return;
+
+            if (card.CornerRadius != 0)
+                return;
+
+            var radius = RetrieveCommonCornerRadius(card.ExtendedCornerRadius);
+
+            if (radius <= 0)
+                return;
+
+            if (Layer.Bounds.IsEmpty)
+                return;
+
+
+            var roundedCorners = RetrieveRoundedCorners(card.ExtendedCornerRadius);
+
+            UIBezierPath mPath = UIBezierPath.FromRoundedRect(Layer.Bounds, roundedCorners, new CGSize(width: radius, height: radius));
+            CAShapeLayer maskLayer = new CAShapeLayer();
+            maskLayer.Frame = Layer.Bounds;
+            maskLayer.Path = mPath.CGPath;
+            Layer.Mask = maskLayer;
+        }
+
 
         protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
@@ -85,6 +138,56 @@ namespace XF.Material.iOS.Renderers
             {
                 RemoveGestureRecognizer(_rippleGestureRecognizerDelegate);
             }
+        }
+
+
+
+        // A very basic way of retrieving same one value for all of the corners
+        private double RetrieveCommonCornerRadius(CornerRadius cornerRadius)
+        {
+            var commonCornerRadius = cornerRadius.TopLeft;
+            if (commonCornerRadius <= 0)
+            {
+                commonCornerRadius = cornerRadius.TopRight;
+                if (commonCornerRadius <= 0)
+                {
+                    commonCornerRadius = cornerRadius.BottomLeft;
+                    if (commonCornerRadius <= 0)
+                    {
+                        commonCornerRadius = cornerRadius.BottomRight;
+                    }
+                }
+            }
+
+            return commonCornerRadius;
+        }
+
+
+        private UIRectCorner RetrieveRoundedCorners(CornerRadius cornerRadius)
+        {
+            var roundedCorners = default(UIRectCorner);
+
+            if (cornerRadius.TopLeft > 0)
+            {
+                roundedCorners |= UIRectCorner.TopLeft;
+            }
+
+            if (cornerRadius.TopRight > 0)
+            {
+                roundedCorners |= UIRectCorner.TopRight;
+            }
+
+            if (cornerRadius.BottomLeft > 0)
+            {
+                roundedCorners |= UIRectCorner.BottomLeft;
+            }
+
+            if (cornerRadius.BottomRight > 0)
+            {
+                roundedCorners |= UIRectCorner.BottomRight;
+            }
+
+            return roundedCorners;
         }
     }
 }
