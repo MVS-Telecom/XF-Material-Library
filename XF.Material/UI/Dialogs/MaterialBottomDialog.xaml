@@ -25,11 +25,18 @@
                                         LineHeight="1"
                                         TextColor="Black"
                                         FontSize="18">
+
                             <ui:MaterialLabel.FontFamily>
                                 <OnPlatform x:TypeArguments="x:String">
                                     <On Platform="Android" Value="sans-serif-medium" />
                                 </OnPlatform>
                             </ui:MaterialLabel.FontFamily>
+                            <ui:MaterialLabel.FontAttributes>
+                                <OnPlatform x:TypeArguments="FontAttributes">
+                                    <On Platform="iOS" Value="Bold"/>
+                                </OnPlatform>
+                            </ui:MaterialLabel.FontAttributes>
+
                         </ui:MaterialLabel>
 
                         <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{StaticResource IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
