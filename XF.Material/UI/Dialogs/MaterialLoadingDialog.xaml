@@ -40,6 +40,7 @@
                                         Text="Lorem ipsum dolor sit amet."
                                         TextColor="#99000000"
                                         TypeScale="Body1"
+                                        LineHeight="1"
                                         VerticalOptions="Center" />
             </Grid>
         </material:MaterialCard>
