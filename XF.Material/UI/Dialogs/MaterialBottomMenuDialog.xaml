@@ -11,10 +11,12 @@
 
     <ContentPage.Content>
 
-        <ui:MaterialCard HasShadow="False" Elevation="0" ExtendedCornerRadius="14,14,0,0" BackgroundColor="Transparent">
-            <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="White">
+        <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="White">
 
-                <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="White">
+            <ui:MaterialCard HasShadow="False" Elevation="0" Margin="0" Padding="0" ExtendedCornerRadius="14,14,0,0" BackgroundColor="White">
+
+
+                <StackLayout x:Name="Container" Margin="0" VerticalOptions="End" BackgroundColor="White">
 
 
                     <!--START: iPhone home bar support-->
@@ -41,10 +43,10 @@
                         <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{StaticResource IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
 
                             <ui:MaterialIcon  
-                            WidthRequest="24" 
-                            HeightRequest="24"
-                            Source="ic_close_24dp" 
-                            TintColor="{StaticResource IconTint}" />
+                                WidthRequest="24" 
+                                HeightRequest="24"
+                                Source="ic_close_24dp" 
+                                TintColor="{StaticResource IconTint}" />
 
                         </ui:MaterialCard>
 
@@ -56,7 +58,10 @@
                     </ui:MaterialCard>
 
                 </StackLayout>
-            </ScrollView>
-        </ui:MaterialCard>
+
+            </ui:MaterialCard>
+
+        </ScrollView>
+
     </ContentPage.Content>
 </dialogs:BaseMaterialModalPage>
