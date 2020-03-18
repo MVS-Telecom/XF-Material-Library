@@ -115,9 +115,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="UI\Dialogs\MaterialBottomMenuDialog.xaml.cs">
-      <DependentUpon>MaterialBottomMenuDialog.xaml</DependentUpon>
-    </Compile>
     <Compile Update="UI\MaterialDivider.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>

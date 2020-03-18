@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using CoreAnimation;
 using CoreGraphics;
 using UIKit;
@@ -84,6 +85,7 @@ namespace XF.Material.iOS.Renderers
             CAShapeLayer maskLayer = new CAShapeLayer();
             maskLayer.Frame = Layer.Bounds;
             maskLayer.Path = mPath.CGPath;
+
             Layer.Mask = maskLayer;
         }
 

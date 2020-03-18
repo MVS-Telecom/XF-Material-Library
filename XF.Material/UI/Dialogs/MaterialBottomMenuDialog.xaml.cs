@@ -102,7 +102,7 @@ namespace XF.Material.UI.Dialogs
                         WidthRequest = 24,
                         HeightRequest = 24,
                         Source = x.IconSource,
-                        Opacity = x.IconOpacity ?? 1
+                        Opacity = x.IconOpacity ?? 0.9f
                     };
 
                     if (!x.IgnoreTint)
@@ -113,7 +113,7 @@ namespace XF.Material.UI.Dialogs
                         Elevation = 0,
                         CornerRadius = 19,
                         Margin = 0,
-                        Padding = new Thickness(8),
+                        Padding = new Thickness(12),
                         VerticalOptions = LayoutOptions.Center,
                         BackgroundColor = (Color)Application.Current.Resources["IconBackground"],
                         Content = icon
