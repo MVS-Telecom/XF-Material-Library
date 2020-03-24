@@ -172,7 +172,7 @@ namespace XF.Material.UI.Dialogs
                 actionText = "DONE";// app.GetString("common_done");
 
             text.Text = actionText.ToUpper();
-            ActionButton.IsVisible = !string.IsNullOrEmpty(text.Text);
+            //ActionButton.IsVisible = !string.IsNullOrEmpty(text.Text);
 
             ActionButton.ClickCommand = new Command(async () =>
             {
@@ -336,9 +336,6 @@ namespace XF.Material.UI.Dialogs
         private void Configure(BottomSheetDialogConfiguration configuration)
         {
             var preferredConfig = configuration ?? GlobalConfiguration ?? new BottomSheetDialogConfiguration();
-
-            preferredConfig.HideActionButton = true;
-            preferredConfig.HideCloseButton = false;
 
             ActionButton.IsVisible = !preferredConfig.HideActionButton;
             Close.IsVisible = !preferredConfig.HideCloseButton;
