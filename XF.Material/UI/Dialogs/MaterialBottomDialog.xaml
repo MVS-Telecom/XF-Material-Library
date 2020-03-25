@@ -70,7 +70,7 @@
                     <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
                     <StackLayout x:Name="systemPadding">
                         <StackLayout.BackgroundColor>
-                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="{StaticResource IconBackground}" />
+                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="White" />
                         </StackLayout.BackgroundColor>
                     </StackLayout>
 
