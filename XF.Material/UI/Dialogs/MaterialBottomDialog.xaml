@@ -59,9 +59,22 @@
 
                     <!--Нижняя кнопка подтверждения-->
                     <!--<ui:MaterialButton x:Name="ActionButton" ButtonType="Flat" Margin="18,6,18,16" BackgroundColor="#00ceb0"/>-->
-                    <ui:MaterialCard x:Name="ActionButton" IsClickable="True" Margin="23,12,23,16" CornerRadius="6" Elevation="0" HasShadow="False" Padding="18,15" BackgroundColor="{StaticResource AccentAlt}">
+                    <ui:MaterialCard x:Name="ActionButton" IsClickable="True" Margin="23,12,23,16" CornerRadius="7" Elevation="0" HasShadow="False" Padding="18,15" BackgroundColor="{StaticResource BlueAccent}">
                         <StackLayout>
-                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" VerticalTextAlignment="Center"  Padding="1" TypeScale="Button" TextColor="White"/>
+
+                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="14" VerticalTextAlignment="Center" Padding="1" TextColor="White">
+                                <ui:MaterialLabel.FontFamily>
+                                    <OnPlatform x:TypeArguments="x:String">
+                                        <On Platform="Android" Value="sans-serif-medium" />
+                                    </OnPlatform>
+                                </ui:MaterialLabel.FontFamily>
+                                <ui:MaterialLabel.FontAttributes>
+                                    <OnPlatform x:TypeArguments="FontAttributes">
+                                        <On Platform="iOS" Value="Bold"/>
+                                    </OnPlatform>
+                                </ui:MaterialLabel.FontAttributes>
+                            </ui:MaterialLabel>
+
                             <ActivityIndicator x:Name="activityIndicator" IsVisible="False" WidthRequest="21" HeightRequest="21" Margin="0" IsRunning="true" Color="White" />
                         </StackLayout>
                     </ui:MaterialCard>
