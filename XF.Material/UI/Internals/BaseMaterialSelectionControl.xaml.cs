@@ -80,6 +80,8 @@ namespace XF.Material.Forms.UI.Internals
         /// </summary>
         public event EventHandler<SelectedChangedEventArgs> SelectedChanged;
 
+
+
         /// <summary>
         /// Gets or sets the font family of the selection control's text.
         /// </summary>
@@ -229,6 +231,7 @@ namespace XF.Material.Forms.UI.Internals
         {
             selectionText.Text = Text;
         }
+
 
         private void OnTextColorChanged()
         {

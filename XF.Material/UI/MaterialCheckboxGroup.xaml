@@ -14,6 +14,7 @@
                                             FontSize="{Binding Source={x:Reference root}, Path=FontSize}"
                                             HorizontalSpacing="{Binding Source={x:Reference root}, Path=HorizontalSpacing}"
                                             IsSelected="{Binding IsSelected}"
+                                            IsEnabled="{Binding IsEnabled}"
                                             SelectedChangeCommand="{Binding SelectedChangeCommand}"
                                             SelectedColor="{Binding Source={x:Reference root}, Path=SelectedColor}"
                                             Text="{Binding Text}"

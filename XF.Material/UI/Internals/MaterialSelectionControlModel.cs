@@ -27,6 +27,13 @@ namespace XF.Material.Forms.UI.Internals
             set => Set(ref _isSelected, value);
         }
 
+        private bool _isEnabled;
+        public bool IsEnabled
+        {
+            get => _isEnabled;
+            set => Set(ref _isEnabled, value);
+        }
+
         private double _horizontalSpacing;
         public double HorizontalSpacing
         {

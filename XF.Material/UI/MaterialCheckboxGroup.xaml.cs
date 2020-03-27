@@ -80,6 +80,7 @@ namespace XF.Material.Forms.UI
                 {
                     SelectedChangeCommand = new Command<bool>((isSelected) => CheckboxSelected(isSelected, i1)),
                     Text = Choices[i].Text,
+                    IsEnabled = Choices[i].IsEnabled,
                     HorizontalSpacing = HorizontalSpacing,
                     FontFamily = FontFamily,
                     FontSize = FontSize,

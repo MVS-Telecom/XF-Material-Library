@@ -79,7 +79,8 @@ namespace XF.Material.Forms.UI
                 var model = new MaterialSelectionControlModel
                 {
                     Index = i,
-                    Text = Choices[i].Text
+                    Text = Choices[i].Text,
+                    IsEnabled = Choices[i].IsEnabled,
                 };
                 model.SelectedChangeCommand = new Command<bool>((isSelected) => RadioButtonSelected(isSelected, model));
 

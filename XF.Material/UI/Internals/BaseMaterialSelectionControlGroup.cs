@@ -23,9 +23,9 @@ namespace XF.Material.Forms.UI.Internals
         string Text { get; }
 
         /// <summary>
-        /// Is item disabled?
+        /// Is item enabled?
         /// </summary>
-        bool Disabled { get; }
+        bool IsEnabled { get; }
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
-        public bool Disabled { get; set; }
+        public bool IsEnabled { get; set; }
 
 
         public Choice(string text)
