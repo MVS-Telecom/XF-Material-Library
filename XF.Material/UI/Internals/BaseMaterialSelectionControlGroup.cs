@@ -46,7 +46,7 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// <inheritdoc/>
         /// </summary>
-        public bool IsEnabled { get; set; }
+        public bool IsEnabled { get; set; } = true;
 
 
         public Choice(string text)
