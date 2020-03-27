@@ -40,7 +40,7 @@ namespace XF.Material.Forms.UI
         /// Initializes a new instance of <see cref="MaterialCheckboxGroup"/>.
         /// </summary>
         /// <param name="choices">The list of string which the user will choose from.</param>
-        public MaterialCheckboxGroup(IList<string> choices)
+        public MaterialCheckboxGroup(IList<IChoice> choices)
         {
             InitializeComponent();
             Choices = choices;
@@ -79,7 +79,7 @@ namespace XF.Material.Forms.UI
                 var model = new MaterialSelectionControlModel
                 {
                     SelectedChangeCommand = new Command<bool>((isSelected) => CheckboxSelected(isSelected, i1)),
-                    Text = Choices[i],
+                    Text = Choices[i].Text,
                     HorizontalSpacing = HorizontalSpacing,
                     FontFamily = FontFamily,
                     FontSize = FontSize,

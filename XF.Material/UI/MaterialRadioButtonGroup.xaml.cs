@@ -39,7 +39,7 @@ namespace XF.Material.Forms.UI
         /// Initializes a new instance of <see cref="MaterialRadioButtonGroup"/>.
         /// </summary>
         /// <param name="choices">The list of string which the user will choose from.</param>
-        public MaterialRadioButtonGroup(IList<string> choices)
+        public MaterialRadioButtonGroup(IList<IChoice> choices)
         {
             InitializeComponent();
             Choices = choices;
@@ -79,7 +79,7 @@ namespace XF.Material.Forms.UI
                 var model = new MaterialSelectionControlModel
                 {
                     Index = i,
-                    Text = Choices[i]
+                    Text = Choices[i].Text
                 };
                 model.SelectedChangeCommand = new Command<bool>((isSelected) => RadioButtonSelected(isSelected, model));
 

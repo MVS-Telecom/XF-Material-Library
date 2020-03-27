@@ -6,6 +6,7 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XF.Material.Forms.UI.Dialogs.Configurations;
+using XF.Material.Forms.UI.Internals;
 
 namespace XF.Material.Forms.UI.Dialogs
 {
@@ -75,7 +76,7 @@ namespace XF.Material.Forms.UI.Dialogs
             bindable.SetValue(DialogTitleProperty, title);
         }
 
-        public static async Task<object> ShowSelectChoiceAsync(string title, IList<string> choices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
+        public static async Task<object> ShowSelectChoiceAsync(string title, IList<IChoice> choices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
         {
             var dialog = new MaterialConfirmationDialog(configuration)
             {
@@ -105,7 +106,7 @@ namespace XF.Material.Forms.UI.Dialogs
             return await dialog.InputTaskCompletionSource.Task;
         }
 
-        public static async Task<object> ShowSelectChoiceAsync(string title, IList<string> choices, int selectedIndex, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
+        public static async Task<object> ShowSelectChoiceAsync(string title, IList<IChoice> choices, int selectedIndex, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
         {
             var dialog = new MaterialConfirmationDialog(configuration)
             {
@@ -137,7 +138,7 @@ namespace XF.Material.Forms.UI.Dialogs
             return await dialog.InputTaskCompletionSource.Task;
         }
 
-        public static async Task<object> ShowSelectChoicesAsync(string title, IList<string> choices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
+        public static async Task<object> ShowSelectChoicesAsync(string title, IList<IChoice> choices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
         {
             var dialog = new MaterialConfirmationDialog(configuration)
             {
@@ -168,7 +169,7 @@ namespace XF.Material.Forms.UI.Dialogs
             return await dialog.InputTaskCompletionSource.Task;
         }
 
-        public static async Task<object> ShowSelectChoicesAsync(string title, IList<string> choices, IList<int> selectedIndices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
+        public static async Task<object> ShowSelectChoicesAsync(string title, IList<IChoice> choices, IList<int> selectedIndices, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialConfirmationDialogConfiguration configuration = null)
         {
             var dialog = new MaterialConfirmationDialog(configuration)
             {

@@ -8,6 +8,72 @@ using XF.Material.Forms.Resources;
 namespace XF.Material.Forms.UI.Internals
 {
     /// <summary>
+    /// 
+    /// </summary>
+    public interface IChoice
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        object Id { get; }
+
+        /// <summary>
+        /// Text
+        /// </summary>
+        string Text { get; }
+
+        /// <summary>
+        /// Is item disabled?
+        /// </summary>
+        bool Disabled { get; }
+    }
+
+    /// <summary>
+    /// <see cref="IChoice"/>
+    /// </summary>
+    public class Choice : IChoice
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        public object Id { get; set; }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public string Text { get; set; }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        public bool Disabled { get; set; }
+
+
+        public Choice(string text)
+        {
+            Id = text;
+            Text = text;
+        }
+
+        public Choice(object id, string text)
+        {
+            Id = id;
+            Text = text;
+        }
+
+        public static explicit operator Choice(string str)
+        {
+            return new Choice(str);
+        }
+
+        public static explicit operator string(Choice choice)
+        {
+            return choice.Text;
+        }
+    }
+
+
+    /// <summary>
     /// Base class of selection control groups. Used by <see cref="MaterialRadioButtonGroup"/> and <see cref="MaterialCheckboxGroup"/>.
     /// </summary>
     public abstract class BaseMaterialSelectionControlGroup : ContentView
@@ -15,7 +81,7 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// Backing field for the bindable property <see cref="Choices"/>.
         /// </summary>
-        public static readonly BindableProperty ChoicesProperty = BindableProperty.Create(nameof(Choices), typeof(IList<string>), typeof(BaseMaterialSelectionControlGroup), default(IList<string>));
+        public static readonly BindableProperty ChoicesProperty = BindableProperty.Create(nameof(Choices), typeof(IList<IChoice>), typeof(BaseMaterialSelectionControlGroup), default(IList<IChoice>));
 
         /// <summary>
         /// Backing field for the bindable property <see cref="FontFamily"/>.
@@ -63,9 +129,9 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// Gets or sets the list of string which the user will choose from.
         /// </summary>
-        public IList<string> Choices
+        public IList<IChoice> Choices
         {
-            get => (IList<string>)GetValue(ChoicesProperty);
+            get => (IList<IChoice>)GetValue(ChoicesProperty);
             set => SetValue(ChoicesProperty, value);
         }
 

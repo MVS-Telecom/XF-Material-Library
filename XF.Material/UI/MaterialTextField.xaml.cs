@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -1264,11 +1265,11 @@ namespace XF.Material.Forms.UI
 
             if (_selectedIndex >= 0)
             {
-                result = await MaterialDialog.Instance.SelectChoiceAsync(title, _choices, _selectedIndex, confirmingText, dismissiveText, configuration);
+                result = await MaterialDialog.Instance.SelectChoiceAsync(title, _choices.Select(x => (IChoice)new Choice(x)).ToList(), _selectedIndex, confirmingText, dismissiveText, configuration);
             }
             else
             {
-                result = await MaterialDialog.Instance.SelectChoiceAsync(title, _choices, confirmingText, dismissiveText, configuration);
+                result = await MaterialDialog.Instance.SelectChoiceAsync(title, _choices.Select(x => (IChoice)new Choice(x)).ToList(), confirmingText, dismissiveText, configuration);
             }
 
             if (result >= 0)

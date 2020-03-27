@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs.Configurations;
+using XF.Material.Forms.UI.Internals;
 
 namespace XF.Material.Forms.UI.Dialogs
 {
@@ -101,7 +102,7 @@ namespace XF.Material.Forms.UI.Dialogs
 
         public async Task<int> SelectChoiceAsync(
             string title,
-            IList<string> choices,
+            IList<IChoice> choices,
             string confirmingText = "Ok",
             string dismissiveText = "Cancel",
             MaterialConfirmationDialogConfiguration configuration = null)
@@ -111,7 +112,7 @@ namespace XF.Material.Forms.UI.Dialogs
 
         public async Task<int> SelectChoiceAsync(
             string title,
-            IList<string> choices,
+            IList<IChoice> choices,
             int selectedIndex,
             string confirmingText = "Ok",
             string dismissiveText = "Cancel",
@@ -122,7 +123,7 @@ namespace XF.Material.Forms.UI.Dialogs
 
         public async Task<int[]> SelectChoicesAsync(
             string title,
-            IList<string> choices,
+            IList<IChoice> choices,
             string confirmingText = "Ok",
             string dismissiveText = "Cancel",
             MaterialConfirmationDialogConfiguration configuration = null)
@@ -132,7 +133,7 @@ namespace XF.Material.Forms.UI.Dialogs
 
         public async Task<int[]> SelectChoicesAsync(
             string title,
-            IList<string> choices,
+            IList<IChoice> choices,
             IList<int> selectedIndices,
             string confirmingText = "Ok",
             string dismissiveText = "Cancel",
