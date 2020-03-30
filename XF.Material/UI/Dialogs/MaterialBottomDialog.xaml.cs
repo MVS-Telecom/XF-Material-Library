@@ -31,11 +31,11 @@ namespace XF.Material.UI.Dialogs
         {
             PositionIn = positionIn;
             PositionOut = positionOut;
-            EasingIn = Easing.Linear;
-            EasingOut = Easing.Linear;
+            EasingIn = Easing.CubicOut;
+            EasingOut = Easing.CubicOut;
 
-            if (PositionIn != MoveAnimationOptions.Center) DurationIn = 140;
-            if (PositionOut != MoveAnimationOptions.Center) DurationOut = 140;
+            if (PositionIn != MoveAnimationOptions.Center) DurationIn = 350;
+            if (PositionOut != MoveAnimationOptions.Center) DurationOut = 350;
         }
 
         public override void Preparing(View content, PopupPage page)

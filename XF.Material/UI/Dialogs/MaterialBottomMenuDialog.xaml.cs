@@ -52,13 +52,22 @@ namespace XF.Material.UI.Dialogs
     }
 
 
+
+    public class BottomSheetMenuDialogConfiguration
+    {
+        public bool HideCloseButton { get; set; }
+        public Color? ActionButtonColor { get; set; }
+        public bool? CloseWhenBackgroundIsClicked { get; set; }
+    }
+
+
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MaterialBottomMenuDialog : BaseMaterialModalPage, IMaterialAwaitableDialog<Option>
     {
         internal MaterialBottomMenuDialog(
             List<Option> options,
             string title = null,
-            BottomSheetDialogConfiguration configuration = null) : this(configuration)
+            BottomSheetMenuDialogConfiguration configuration = null) : this(configuration)
         {
             StackLayout content = new StackLayout();
 
@@ -78,7 +87,7 @@ namespace XF.Material.UI.Dialogs
                     CornerRadius = 0,
                     Elevation = 0,
                     IsClickable = true,
-                    Padding = new Thickness(8, 12),
+                    Padding = new Thickness(8, 8),
                     Margin = new Thickness(0),
                 };
 
@@ -90,7 +99,8 @@ namespace XF.Material.UI.Dialogs
 
                 var view = new StackLayout();
                 view.Orientation = StackOrientation.Horizontal;
-                view.Padding = new Thickness(12, 1, 12, 1);
+                view.Padding = new Thickness(14, 1, 14, 1);
+                view.VerticalOptions = LayoutOptions.Center;
 
 
                 #region Иконка
@@ -99,23 +109,23 @@ namespace XF.Material.UI.Dialogs
                 {
                     var icon = new MaterialIcon()
                     {
-                        WidthRequest = 24,
-                        HeightRequest = 24,
+                        WidthRequest = 21,
+                        HeightRequest = 21,
                         Source = x.IconSource,
                         Opacity = x.IconOpacity ?? 0.9f
                     };
 
                     if (!x.IgnoreTint)
-                        icon.TintColor = x.IconTint ?? (Color)Application.Current.Resources["IconTint"];
+                        icon.TintColor = x.IconTint ?? (Color)Application.Current.Resources["BottomSheet_IconTint"];
 
                     view.Children.Add(new MaterialCard()
                     {
                         Elevation = 0,
-                        CornerRadius = 19,
+                        CornerRadius = 25,
                         Margin = 0,
-                        Padding = new Thickness(12),
+                        Padding = new Thickness(14),
                         VerticalOptions = LayoutOptions.Center,
-                        BackgroundColor = (Color)Application.Current.Resources["IconBackground"],
+                        BackgroundColor = (Color)Application.Current.Resources["BottomSheet_IconBackground"],
                         Content = icon
                     });
                 }
@@ -128,9 +138,12 @@ namespace XF.Material.UI.Dialogs
                 view.Children.Add(new MaterialLabel()
                 {
                     Padding = new Thickness(10, 1),
-                    TypeScale = MaterialTypeScale.Body1,
-                    TextColor = Color.Black,
+                    FontSize = 17,
+                    //TypeScale = MaterialTypeScale.Body1,
+                    TextColor = (Color)Application.Current.Resources["BottomSheet_TextColor"],// Color.Black,
+                    //FontAttributes = FontAttributes.Bold,
                     Text = x.Title,
+                    LineHeight = 1,
                     VerticalOptions = LayoutOptions.Center
                 });
 
@@ -165,7 +178,7 @@ namespace XF.Material.UI.Dialogs
             Animation = new MaterialBottomSheetAnimation(MoveAnimationOptions.Bottom, MoveAnimationOptions.Bottom);
         }
 
-        internal MaterialBottomMenuDialog(BottomSheetDialogConfiguration configuration = null)
+        internal MaterialBottomMenuDialog(BottomSheetMenuDialogConfiguration configuration = null)
         {
             InitializeComponent();
             Configure(configuration);
@@ -173,7 +186,7 @@ namespace XF.Material.UI.Dialogs
 
         public TaskCompletionSource<Option> InputTaskCompletionSource { get; set; }
 
-        internal static BottomSheetDialogConfiguration GlobalConfiguration { get; set; }
+        internal static BottomSheetMenuDialogConfiguration GlobalConfiguration { get; set; }
 
 
         /// <summary>
@@ -188,7 +201,7 @@ namespace XF.Material.UI.Dialogs
         public static async Task<Option> ShowAsync(
             List<Option> options,
             string title = null,
-            BottomSheetDialogConfiguration configuration = null)
+            BottomSheetMenuDialogConfiguration configuration = null)
         {
             var dialog = new MaterialBottomMenuDialog(options, title, configuration);
             await dialog.ShowAsync();
@@ -241,12 +254,9 @@ namespace XF.Material.UI.Dialogs
             }
         }
 
-        private void Configure(BottomSheetDialogConfiguration configuration)
+        private void Configure(BottomSheetMenuDialogConfiguration configuration)
         {
-            var preferredConfig = configuration ?? GlobalConfiguration ?? new BottomSheetDialogConfiguration();
-
-            preferredConfig.HideActionButton = true;
-            preferredConfig.HideCloseButton = false;
+            var preferredConfig = configuration ?? GlobalConfiguration ?? new BottomSheetMenuDialogConfiguration();
 
             Close.IsVisible = !preferredConfig.HideCloseButton;
             CloseWhenBackgroundIsClicked = preferredConfig.CloseWhenBackgroundIsClicked ?? true;

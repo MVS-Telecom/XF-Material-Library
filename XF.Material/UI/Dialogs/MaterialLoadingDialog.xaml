@@ -11,7 +11,7 @@
                                Margin="{DynamicResource Material.Dialog.Margin}"
                                Padding="0"
                                BackgroundColor="White"
-                               CornerRadius="4"
+                               CornerRadius="11"
                                Elevation="24"
                                HasShadow="True"
                                HorizontalOptions="Center"
