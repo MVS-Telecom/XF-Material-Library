@@ -153,6 +153,7 @@ namespace XF.Material.UI.Dialogs
         public bool HideActionButton { get; set; }
         public Color? ActionButtonColor { get; set; }
         public bool? CloseWhenBackgroundIsClicked { get; set; }
+        public bool? TransparentBackground { get; set; }
     }
 
 
@@ -278,10 +279,29 @@ namespace XF.Material.UI.Dialogs
             return await dialog.InputTaskCompletionSource.Task;
         }
 
-        protected override void OnBackButtonDismissed()
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="title"></param>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static async Task<MaterialBottomDialog> Show(
+            View content,
+            FormattedString title = null,
+            BottomSheetDialogConfiguration configuration = null)
         {
-            InputTaskCompletionSource?.SetResult(false);
+            var dialog = new MaterialBottomDialog(content, title, actionText: null, onAction: null, configuration);
+            await dialog.ShowAsync();
+
+            Task.Run(async () =>
+            {
+                await dialog.InputTaskCompletionSource.Task;
+            });
+
+            return dialog;
         }
+
 
         protected override void OnAppearing()
         {
@@ -289,12 +309,6 @@ namespace XF.Material.UI.Dialogs
             ChangeLayout();
         }
 
-        protected override bool OnBackgroundClicked()
-        {
-            InputTaskCompletionSource?.SetResult(false);
-
-            return base.OnBackgroundClicked();
-        }
 
         protected override void OnDisappearing()
         {
@@ -341,6 +355,10 @@ namespace XF.Material.UI.Dialogs
             Close.IsVisible = !preferredConfig.HideCloseButton;
             ActionButton.BackgroundColor = preferredConfig.ActionButtonColor ?? ActionButton.BackgroundColor;
             CloseWhenBackgroundIsClicked = preferredConfig.CloseWhenBackgroundIsClicked ?? true;
+            BackgroundInputTransparent = preferredConfig.TransparentBackground ?? false;
+
+            if (preferredConfig.TransparentBackground == true)
+                BackgroundColor = Color.Transparent;
         }
 
     }
