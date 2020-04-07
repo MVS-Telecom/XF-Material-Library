@@ -222,6 +222,13 @@ namespace XF.Material.UI.Dialogs
                 InputTaskCompletionSource?.SetResult(false);
             });
 
+            var pan = new PanGestureRecognizer();
+            pan.PanUpdated += (s, e) =>
+            {
+                
+            };
+            DragAnchor.GestureRecognizers.Add(pan);
+
             Animation = new MaterialBottomSheetAnimation(MoveAnimationOptions.Bottom, MoveAnimationOptions.Bottom);
         }
 
