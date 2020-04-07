@@ -138,7 +138,8 @@ namespace XF.Material.UI.Dialogs
                 view.Children.Add(new MaterialLabel()
                 {
                     Padding = new Thickness(10, 1),
-                    FontSize = 17,
+                    TypeScale = MaterialTypeScale.Body1,
+                    //FontSize = 17,
                     //TypeScale = MaterialTypeScale.Body1,
                     TextColor = (Color)Application.Current.Resources["BottomSheet_TextColor"],// Color.Black,
                     //FontAttributes = FontAttributes.Bold,

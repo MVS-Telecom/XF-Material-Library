@@ -154,6 +154,8 @@ namespace XF.Material.UI.Dialogs
         public Color? ActionButtonColor { get; set; }
         public bool? CloseWhenBackgroundIsClicked { get; set; }
         public bool? TransparentBackground { get; set; }
+        public bool? DisableContentPadding { get; set; }
+        public bool? IsDraggable { get; set; }
     }
 
 
@@ -357,8 +359,14 @@ namespace XF.Material.UI.Dialogs
             CloseWhenBackgroundIsClicked = preferredConfig.CloseWhenBackgroundIsClicked ?? true;
             BackgroundInputTransparent = preferredConfig.TransparentBackground ?? false;
 
+            if (preferredConfig.DisableContentPadding == true)
+                Content.Padding = new Thickness(0, 0, 0, 0);
+
             if (preferredConfig.TransparentBackground == true)
                 BackgroundColor = Color.Transparent;
+
+            if (preferredConfig.IsDraggable == true)
+                DragAnchor.IsVisible = true;
         }
 
     }

@@ -13,7 +13,7 @@
 
         <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
 
-            <ui:MaterialCard HasShadow="False" Elevation="0" Margin="0" Padding="0" CornerRadius="0"  ExtendedCornerRadius="14,14,0,0" BackgroundColor="White">
+            <ui:MaterialCard HasShadow="False" Elevation="0" Margin="0" Padding="0" CornerRadius="0"  ExtendedCornerRadius="16,16,0,0" BackgroundColor="White">
 
 
                 <StackLayout x:Name="Container" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">

@@ -59,14 +59,20 @@ namespace XF.Material.Droid.Renderers
 
         private void ChangeTintColor(Drawable drawable)
         {
-            if (_materialIcon.TintColor.IsDefault || drawable == null)
-            {
+            if (drawable == null)
                 return;
-            }
 
-            var tintColor = _materialIcon.TintColor.ToAndroid();
-            DrawableCompat.SetTint(drawable, tintColor);
-            Control.SetImageDrawable(drawable);
+
+            if (_materialIcon.TintColor.IsDefault)
+            {
+                DrawableCompat.SetTintList(drawable, null);
+            }
+            else
+            {
+                var tintColor = _materialIcon.TintColor.ToAndroid();
+                DrawableCompat.SetTint(drawable, tintColor);
+                Control.SetImageDrawable(drawable);
+            }
         }
     }
 }
