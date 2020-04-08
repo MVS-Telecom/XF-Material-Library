@@ -5,7 +5,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:ui="clr-namespace:XF.Material.Forms.UI"
+             xmlns:ui="clr-namespace:XF.Material.Forms.UI" 
+             xmlns:internal="clr-namespace:XF.Material.UI.Dialogs"
              mc:Ignorable="d"
              HasSystemPadding="False"
              x:Class="XF.Material.UI.Dialogs.MaterialBottomDialog">
@@ -17,8 +18,10 @@
             <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" BackgroundColor="White" ExtendedCornerRadius="16,16,0,0" Margin="0" Padding="0">
                 <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="Transparent">
 
-                    <Frame x:Name="DragAnchor" IsVisible="False" HorizontalOptions="Center" Margin="0,12,0,8" WidthRequest="70" CornerRadius="3" HasShadow="False" Padding="0" HeightRequest="4.5" BackgroundColor="#ddd"/>
-
+                    <Frame x:Name="DragAnchor" HasShadow="False" IsVisible="False" IsEnabled="True" Padding="0,12,0,8" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
+                        <Frame HorizontalOptions="Center" WidthRequest="70" CornerRadius="3" HasShadow="False" Padding="0" HeightRequest="4.5" BackgroundColor="#ddd"/>
+                    </Frame>
+                    
                     <!--Хедер диалога-->
                     <StackLayout x:Name="Header" Margin="21,16,21,16" Orientation="Horizontal">
 

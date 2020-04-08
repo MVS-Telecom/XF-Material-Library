@@ -15,6 +15,51 @@ using Rg.Plugins.Popup.Services;
 
 namespace XF.Material.UI.Dialogs
 {
+    internal enum DragMode
+    {
+        Touch,
+        LongPress
+    }
+
+    internal enum DragDirectionType
+    {
+        All,
+        Vertical,
+        Horizontal
+    }
+
+    internal class DragEventArgs : EventArgs
+    {
+        internal float Value { get; set; }
+    }
+
+    internal class DialogAnchor : Frame
+    {
+        internal event EventHandler<DragEventArgs> DragX = delegate { };
+        internal event EventHandler<DragEventArgs> DragY = delegate { };
+
+        internal DragMode DragMode { get; set; } = DragMode.Touch;
+        internal DragDirectionType DragDirection { get; set; } = DragDirectionType.Vertical;
+
+        internal void _DragStarted()
+        {
+        }
+
+        internal void _DragEnded()
+        {
+        }
+
+        internal void _DragX(float x)
+        {
+            DragX(this, new DragEventArgs() { Value = x });
+        }
+
+        internal void _DragY(float y)
+        {
+            DragY(this, new DragEventArgs() { Value = y });
+        }
+    }
+
     public class MaterialBottomSheetAnimation : FadeAnimation
     {
         private double _defaultScale;
@@ -222,15 +267,20 @@ namespace XF.Material.UI.Dialogs
                 InputTaskCompletionSource?.SetResult(false);
             });
 
-            var pan = new PanGestureRecognizer();
-            pan.PanUpdated += (s, e) =>
-            {
-                
-            };
-            DragAnchor.GestureRecognizers.Add(pan);
 
             Animation = new MaterialBottomSheetAnimation(MoveAnimationOptions.Bottom, MoveAnimationOptions.Bottom);
+
+            //DragAnchor.DragX += (s, e) =>
+            //{
+            //    //this.TranslationX = e.Value;
+            //};
+
+            //DragAnchor.DragY += (s, e) =>
+            //{
+            //    this.TranslationY = e.Value;
+            //};
         }
+
 
         internal MaterialBottomDialog(BottomSheetDialogConfiguration configuration = null)
         {
