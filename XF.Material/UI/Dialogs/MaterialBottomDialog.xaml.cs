@@ -12,6 +12,7 @@ using Rg.Plugins.Popup.Animations;
 using Rg.Plugins.Popup.Interfaces.Animations;
 using Rg.Plugins.Popup.Pages;
 using Rg.Plugins.Popup.Services;
+using System.Threading;
 
 namespace XF.Material.UI.Dialogs
 {
@@ -207,6 +208,9 @@ namespace XF.Material.UI.Dialogs
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MaterialBottomDialog : BaseMaterialModalPage, IMaterialAwaitableDialog<bool>
     {
+        public event EventHandler Dismissed = delegate { };
+
+
         internal MaterialBottomDialog(
             View content,
             FormattedString title = null,
@@ -302,7 +306,7 @@ namespace XF.Material.UI.Dialogs
         /// <param name="onAction"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static async Task<bool> ShowAsync(
+        public static async Task<MaterialBottomDialog> Show(
             View content,
             FormattedString title = null,
             string actionText = null,
@@ -312,7 +316,13 @@ namespace XF.Material.UI.Dialogs
             var dialog = new MaterialBottomDialog(content, title, actionText, onAction, configuration);
             await dialog.ShowAsync();
 
-            return await dialog.InputTaskCompletionSource.Task;
+            _ = Task.Run(async () =>
+            {
+                await dialog.InputTaskCompletionSource.Task;
+                dialog.OnDismissed();
+            });
+
+            return dialog;
         }
 
 
@@ -325,7 +335,7 @@ namespace XF.Material.UI.Dialogs
         /// <param name="onAction"></param>
         /// <param name="configuration"></param>
         /// <returns></returns>
-        public static async Task<bool> ShowAsync(
+        public static async Task<MaterialBottomDialog> Show(
             View content,
             FormattedString title = null,
             string actionText = null,
@@ -335,7 +345,14 @@ namespace XF.Material.UI.Dialogs
             var dialog = new MaterialBottomDialog(content, title, actionText, () => Device.InvokeOnMainThreadAsync(() => onAction?.Invoke() ?? true), configuration);
             await dialog.ShowAsync();
 
-            return await dialog.InputTaskCompletionSource.Task;
+            _ = Task.Run(async () =>
+              {
+                  await dialog.InputTaskCompletionSource.Task;
+                  dialog.OnDismissed();
+              });
+
+            return dialog;
+
         }
 
         /// <summary>
@@ -353,14 +370,44 @@ namespace XF.Material.UI.Dialogs
             var dialog = new MaterialBottomDialog(content, title, actionText: null, onAction: null, configuration);
             await dialog.ShowAsync();
 
-            Task.Run(async () =>
-            {
-                await dialog.InputTaskCompletionSource.Task;
-            });
+            _ = Task.Run(async () =>
+              {
+                  await dialog.InputTaskCompletionSource.Task;
+                  dialog.OnDismissed();
+              });
 
             return dialog;
         }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public Task WaitForDismiss()
+        {
+            return Task.Run(() =>
+            {
+                AutoResetEvent r = new AutoResetEvent(false);
+
+                var handler = new EventHandler((s, e) =>
+                {
+                    r.Set();
+                });
+
+                Dismissed += handler;
+                r.WaitOne();
+                Dismissed -= handler;
+            });
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        private void OnDismissed()
+        {
+            Dismissed(this, new EventArgs());
+        }
 
         protected override void OnAppearing()
         {
@@ -377,7 +424,6 @@ namespace XF.Material.UI.Dialogs
         protected override void OnOrientationChanged(DisplayOrientation orientation)
         {
             base.OnOrientationChanged(orientation);
-
             ChangeLayout();
         }
 
