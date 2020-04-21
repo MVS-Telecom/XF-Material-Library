@@ -99,14 +99,16 @@ namespace XF.Material.UI.Dialogs
 
                 var view = new StackLayout();
                 view.Orientation = StackOrientation.Horizontal;
-                view.Padding = new Thickness(14, 1, 14, 1);
+                
                 view.VerticalOptions = LayoutOptions.Center;
-
+                view.Padding = new Thickness(2, 1, 2, 1);
 
                 #region Иконка
 
                 if (!string.IsNullOrEmpty(x.IconSource))
                 {
+                    view.Padding = new Thickness(14, 1, 14, 1);
+
                     var icon = new MaterialIcon()
                     {
                         WidthRequest = 21,
