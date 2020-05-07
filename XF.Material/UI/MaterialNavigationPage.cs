@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using XF.Material.Forms.Resources;
@@ -37,9 +36,9 @@ namespace XF.Material.Forms.UI
         public static readonly BindableProperty AppBarTitleTextFontSizeProperty = BindableProperty.Create("AppBarTitleTextFontSize", typeof(double), typeof(MaterialNavigationPage), 24.0);
 
         /// <summary>
-        /// Attached property that is used by <see cref="Page"/>s to determine whether the app bar will draw a shadow.
+        /// Attached property that is used by <see cref="Page"/>s to determine the size of the shadow below the app bar.
         /// </summary>
-        public static readonly BindableProperty HasShadowProperty = BindableProperty.Create("HasShadow", typeof(bool), typeof(MaterialNavigationPage), true);
+        public static readonly BindableProperty AppBarElevationProperty = BindableProperty.Create("AppBarElevation", typeof(double), typeof(MaterialNavigationPage), 4.0);
 
         /// <summary>
         /// Attached property that is used by <see cref="Page"/>s to determine the status bar color.
@@ -104,9 +103,9 @@ namespace XF.Material.Forms.UI
         /// <summary>
         /// For binding use only.
         /// </summary>
-        public static bool GetHasShadow(BindableObject view)
+        public static double GetAppBarElevation(BindableObject view)
         {
-            return (bool)view.GetValue(HasShadowProperty);
+            return (double)view.GetValue(AppBarElevationProperty);
         }
 
         /// <summary>
@@ -160,9 +159,9 @@ namespace XF.Material.Forms.UI
         /// <summary>
         /// For binding use only.
         /// </summary>
-        public static void SetHasShadow(BindableObject view, bool hasShadow)
+        public static void SetAppBarElevation(BindableObject view, double elevation)
         {
-            view.SetValue(HasShadowProperty, hasShadow);
+            view.SetValue(AppBarElevationProperty, elevation);
         }
 
         /// <summary>
@@ -234,27 +233,34 @@ namespace XF.Material.Forms.UI
             var page = sender as Page;
 
             if (page == null)
+            {
                 return;
+            }
 
             if (e.PropertyName == nameof(Title) && page.GetValue(TitleViewProperty) is TitleLabel label)
+            {
                 label.Text = page.Title;
-            else if (e.PropertyName == StatusBarColorProperty.PropertyName)
-                ChangeStatusBarColor(page);
+            }
             else if (e.PropertyName == AppBarColorProperty.PropertyName)
+            {
                 ChangeBarBackgroundColor(page);
+            }
+            else if (e.PropertyName == AppBarTitleTextColorProperty.PropertyName)
+            {
+                ChangeBarTextColor(page);
+            }
             else if (e.PropertyName == AppBarTitleTextFontFamilyProperty.PropertyName)
+            {
                 ChangeFont(page);
+            }
             else if (e.PropertyName == AppBarTitleTextFontSizeProperty.PropertyName)
+            {
                 ChangeFont(page);
+            }
             else if (e.PropertyName == AppBarTitleTextAlignmentProperty.PropertyName)
+            {
                 ChangeFont(page);
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            ChangeStatusBarColor(CurrentPage);
+            }
         }
 
         /// <summary>
@@ -300,7 +306,6 @@ namespace XF.Material.Forms.UI
 
             ChangeFont(page);
             ChangeBarTextColor(page);
-            ChangeStatusBarColor(page);
             ChangeBarBackgroundColor(page);
         }
 
@@ -341,7 +346,7 @@ namespace XF.Material.Forms.UI
 
         private void ChangeFont(Page page)
         {
-            var currentTitleView = (TitleLabel)page.GetValue(TitleViewProperty);
+            var currentTitleView = page.GetValue(TitleViewProperty);
 
             var textAlignment = (TextAlignment)page.GetValue(AppBarTitleTextAlignmentProperty);
             var fontFamily = (string)page.GetValue(AppBarTitleTextFontFamilyProperty);
@@ -349,9 +354,12 @@ namespace XF.Material.Forms.UI
 
             if (currentTitleView != null)
             {
-                currentTitleView.HorizontalTextAlignment = textAlignment;
-                currentTitleView.FontFamily = fontFamily;
-                currentTitleView.FontSize = fontSize;
+                if (currentTitleView is TitleLabel titleLabelView)
+                {
+                    titleLabelView.HorizontalTextAlignment = textAlignment;
+                    titleLabelView.FontFamily = fontFamily;
+                    titleLabelView.FontSize = fontSize;
+                }
                 return;
             }
 
@@ -382,12 +390,6 @@ namespace XF.Material.Forms.UI
             _customTitleView.FontFamily = fontFamily;
             _customTitleView.FontSize = fontSize;
             _customTitleView.Text = page.Title;
-        }
-
-        private static void ChangeStatusBarColor(Page page)
-        {
-            var statusBarColor = (Color)page.GetValue(StatusBarColorProperty);
-            Material.PlatformConfiguration.ChangeStatusBarColor(statusBarColor.IsDefault ? Material.Color.PrimaryVariant : statusBarColor);
         }
     }
 

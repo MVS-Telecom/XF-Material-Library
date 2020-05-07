@@ -55,7 +55,7 @@ namespace XF.Material.Forms.UI
                     if (control._selectedIndex != index)
                     {
                         control._selectedIndex = index;
-                        control.Text = control._choices[index];
+                        control.Text = control._choicesResults[index];
                         control.AnimateToInactiveOrFocusedStateOnStart(control);
 
                         control.UpdateCounter();
@@ -99,7 +99,7 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty IsTextPredictionEnabledProperty = BindableProperty.Create(nameof(IsTextPredictionEnabled), typeof(bool), typeof(MaterialTextField), false);
 
-        public static readonly BindableProperty LeadingIconProperty = BindableProperty.Create(nameof(LeadingIcon), typeof(string), typeof(MaterialTextField));
+        public static readonly BindableProperty LeadingIconProperty = BindableProperty.Create(nameof(LeadingIcon), typeof(ImageSource), typeof(MaterialTextField));
 
         public static readonly BindableProperty LeadingIconTintColorProperty = BindableProperty.Create(nameof(LeadingIconTintColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#99000000"));
 
@@ -135,16 +135,18 @@ namespace XF.Material.Forms.UI
 
         public static readonly BindableProperty UnderlineColorProperty = BindableProperty.Create(nameof(UnderlineColor), typeof(Color), typeof(MaterialTextField), Color.FromHex("#99000000"));
 
+        public static readonly BindableProperty PlaceholderLineBreakModeProperty = BindableProperty.Create(nameof(PlaceholderLineBreakMode), typeof(LineBreakMode), typeof(MaterialTextField), LineBreakMode.WordWrap);
+
         //public static readonly BindableProperty ChoicesBindingNameProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(MaterialTextField), string.Empty, BindingMode.TwoWay);
 
         private const double AnimationDuration = 0.35;
         private readonly Easing _animationCurve = Easing.SinOut;
         private readonly Dictionary<string, Action> _propertyChangeActions;
         private IList<string> _choices;
+        private IList<string> _choicesResults;
         private bool _counterEnabled;
         private DisplayInfo _lastDeviceDisplay;
         private int _selectedIndex = -1;
-        private bool _wasFocused;
 
         /// <summary>
         /// Initializes a new instance of <see cref="MaterialTextField"/>.
@@ -384,9 +386,9 @@ namespace XF.Material.Forms.UI
         /// <summary>
         /// Gets or sets the image source of the icon to be showed at the left side of this text field.
         /// </summary>
-        public string LeadingIcon
+        public ImageSource LeadingIcon
         {
-            get => (string)GetValue(LeadingIconProperty);
+            get => (ImageSource)GetValue(LeadingIconProperty);
             set => SetValue(LeadingIconProperty, value);
         }
 
@@ -423,15 +425,7 @@ namespace XF.Material.Forms.UI
         public string Placeholder
         {
             get => (string)GetValue(PlaceholderProperty);
-            set
-            {
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    throw new ArgumentNullException($"{nameof(Placeholder)} must not be null, empty, or a white space.");
-                }
-
-                SetValue(PlaceholderProperty, value);
-            }
+            set => SetValue(PlaceholderProperty, value);
         }
 
         /// <summary>
@@ -490,6 +484,8 @@ namespace XF.Material.Forms.UI
 
         public string ChoicesBindingName { get; set; }
 
+        public string ChoicesResultBindingName { get; set; }
+
         //public string ChoicesBindingName
         //{
         //    get => (string)this.GetValue(ChoicesBindingNameProperty);
@@ -504,19 +500,7 @@ namespace XF.Material.Forms.UI
         public string Text
         {
             get => (string)GetValue(TextProperty);
-            set
-            {
-                if (!string.IsNullOrEmpty(value) && !FloatingPlaceholderEnabled)
-                {
-                    placeholder.IsVisible = false;
-                }
-                else if (string.IsNullOrEmpty(value) && !FloatingPlaceholderEnabled)
-                {
-                    placeholder.IsVisible = true;
-                }
-
-                SetValue(TextProperty, value);
-            }
+            set => SetValue(TextProperty, value);
         }
 
         /// <summary>
@@ -574,6 +558,15 @@ namespace XF.Material.Forms.UI
             set => SetValue(UnderlineColorProperty, value);
         }
 
+        /// <summary>
+        /// Gets or sets the line break mode for the placeholder
+        /// </summary>
+        public LineBreakMode PlaceholderLineBreakMode
+        {
+            get { return (LineBreakMode)GetValue(PlaceholderLineBreakModeProperty); }
+            set { SetValue(PlaceholderLineBreakModeProperty, value); }
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// For internal use only.
@@ -598,7 +591,7 @@ namespace XF.Material.Forms.UI
                 entry.SizeChanged -= Entry_SizeChanged;
                 entry.Focused -= Entry_Focused;
                 entry.Unfocused -= Entry_Unfocused;
-                entry.Completed += Entry_Completed;
+                entry.Completed -= Entry_Completed;
                 DeviceDisplay.MainDisplayInfoChanged -= DeviceDisplay_MainDisplayInfoChanged;
             }
         }
@@ -769,7 +762,7 @@ namespace XF.Material.Forms.UI
                 placeholder.TextColor = PlaceholderColor;
             }
 
-            if (startObject != null && !string.IsNullOrEmpty(Text) && !_wasFocused)
+            if (startObject != null && !string.IsNullOrEmpty(Text))
             {
                 if (placeholder.TranslationY == placeholderEndY)
                 {
@@ -926,7 +919,6 @@ namespace XF.Material.Forms.UI
 
         private void Entry_Focused(object sender, FocusEventArgs e)
         {
-            _wasFocused = true;
             FocusCommand?.Execute(entry.IsFocused);
             Focused?.Invoke(this, e);
             UpdateCounter();
@@ -1002,31 +994,40 @@ namespace XF.Material.Forms.UI
             UpdateCounter();
         }
 
-        private IList<string> GetChoices()
+        private IList<string> GetChoices(out IList<string> choicesResults)
         {
             var choiceStrings = new List<string>(Choices.Count);
+            choicesResults = new List<string>(Choices.Count);
             var listType = Choices[0].GetType();
             foreach (var item in Choices)
             {
+                string choice = item.ToString();
                 if (!string.IsNullOrEmpty(ChoicesBindingName))
                 {
                     var propInfo = listType.GetProperty(ChoicesBindingName);
 
-                    if (propInfo == null)
-                    {
-                        System.Diagnostics.Debug.WriteLine($"Property {ChoicesBindingName} was not found for item in {Choices}.");
-                        choiceStrings.Add(item.ToString());
+                    if (propInfo != null)
+                    { 
+                        var propValue = propInfo.GetValue(item);
+                        choice =propValue.ToString();
                     }
-                    else
+                }
+
+                choiceStrings.Add(choice);
+
+                string choiceResult = choice;
+                if (!string.IsNullOrEmpty(ChoicesResultBindingName))
+                {
+                    var propInfo = listType.GetProperty(ChoicesResultBindingName);
+
+                    if (propInfo != null)
                     {
                         var propValue = propInfo.GetValue(item);
-                        choiceStrings.Add(propValue.ToString());
+                        choiceResult = propValue.ToString();
                     }
                 }
-                else
-                {
-                    choiceStrings.Add(item.ToString());
-                }
+
+                choicesResults.Add(choiceResult);
             }
 
             return choiceStrings;
@@ -1055,7 +1056,15 @@ namespace XF.Material.Forms.UI
 
         private void OnChoicesChanged(ICollection choices)
         {
-            _choices = choices?.Count > 0 ? GetChoices() : null;
+            if (choices?.Count > 0)
+            {
+                _choices = GetChoices(out _choicesResults);
+            }
+            else
+            {
+                _choices = null;
+                _choicesResults = null;
+            }
         }
 
         private void OnEnabledChanged(bool isEnabled)
@@ -1077,6 +1086,11 @@ namespace XF.Material.Forms.UI
             }
         }
 
+        private void OnPlaceholderLineBreakModeChanged()
+        {
+            placeholder.LineBreakMode = PlaceholderLineBreakMode;
+        }
+
         private void OnFloatingPlaceholderEnabledChanged(bool isEnabled)
         {
             double marginTopVariation = Device.RuntimePlatform == Device.iOS ? 18 : 20;
@@ -1087,6 +1101,8 @@ namespace XF.Material.Forms.UI
 
             var trailingIconMargin = trailingIcon.Margin;
             trailingIcon.Margin = isEnabled ? new Thickness(trailingIconMargin.Left, 16, trailingIconMargin.Right, 16) : new Thickness(trailingIconMargin.Left, 8, trailingIconMargin.Right, 8);
+
+            UpdatePlaceholderVisibility();
         }
 
         private void OnHasErrorChanged()
@@ -1117,9 +1133,9 @@ namespace XF.Material.Forms.UI
             helper.FontFamily = counter.FontFamily = fontFamily;
         }
 
-        private void OnInputTypeChanged(MaterialTextFieldInputType inputType)
+        private void OnInputTypeChanged()
         {
-            switch (inputType)
+            switch (InputType)
             {
                 case MaterialTextFieldInputType.Chat:
                     entry.Keyboard = Keyboard.Chat;
@@ -1137,8 +1153,31 @@ namespace XF.Material.Forms.UI
                     entry.Keyboard = Keyboard.Numeric;
                     break;
 
+                //Only when plain type of keyboard we need consider the keyboard flags
+                //Same as Xamarin.Forms.Entry control
                 case MaterialTextFieldInputType.Plain:
-                    entry.Keyboard = Keyboard.Plain;
+                    var flags = KeyboardFlags.None;
+                    if (IsTextAllCaps)
+                    {
+                        flags |= KeyboardFlags.CapitalizeCharacter;
+                    }
+
+                    if (IsAutoCapitalizationEnabled && !IsTextAllCaps)
+                    {
+                        flags |= KeyboardFlags.CapitalizeWord;
+                    }
+
+                    if (IsSpellCheckEnabled)
+                    {
+                        flags |= KeyboardFlags.Spellcheck;
+                    }
+
+                    if (IsTextPredictionEnabled)
+                    {
+                        flags |= KeyboardFlags.Suggestions;
+                    }
+
+                    entry.Keyboard = Keyboard.Create(flags);
                     break;
 
                 case MaterialTextFieldInputType.Telephone:
@@ -1158,7 +1197,7 @@ namespace XF.Material.Forms.UI
                     break;
 
                 case MaterialTextFieldInputType.Password:
-                    entry.Keyboard = Keyboard.Text;
+                    entry.Keyboard = Keyboard.Plain;
                     break;
 
                 case MaterialTextFieldInputType.Choice:
@@ -1168,43 +1207,16 @@ namespace XF.Material.Forms.UI
 
             // Hint: Will use this for MaterialTextArea
             // entry.AutoSize = inputType == MaterialTextFieldInputType.MultiLine ? EditorAutoSizeOption.TextChanges : EditorAutoSizeOption.Disabled;
-            _gridContainer.InputTransparent = inputType == MaterialTextFieldInputType.Choice;
-            trailingIcon.IsVisible = inputType == MaterialTextFieldInputType.Choice;
+            _gridContainer.InputTransparent = InputType == MaterialTextFieldInputType.Choice;
+            trailingIcon.IsVisible = InputType == MaterialTextFieldInputType.Choice;
 
-            entry.IsNumericKeyboard = inputType == MaterialTextFieldInputType.Telephone || inputType == MaterialTextFieldInputType.Numeric;
-            entry.IsPassword = inputType == MaterialTextFieldInputType.Password || inputType == MaterialTextFieldInputType.NumericPassword;
+            entry.IsNumericKeyboard = InputType == MaterialTextFieldInputType.Telephone || InputType == MaterialTextFieldInputType.Numeric;
+            entry.IsPassword = InputType == MaterialTextFieldInputType.Password || InputType == MaterialTextFieldInputType.NumericPassword;
         }
 
-        private void OnKeyboardFlagsChanged(bool isAutoCapitalizationEnabled, bool isSpellCheckEnabled, bool isTextPredictionEnabled, bool isTextAllCaps)
+        private void OnLeadingIconChanged(ImageSource imageSource)
         {
-            var flags = KeyboardFlags.None;
-
-            if (isTextAllCaps)
-            {
-                flags |= KeyboardFlags.CapitalizeCharacter;
-            }
-
-            if (isAutoCapitalizationEnabled && !isTextAllCaps)
-            {
-                flags |= KeyboardFlags.CapitalizeWord;
-            }
-
-            if (isSpellCheckEnabled)
-            {
-                flags |= KeyboardFlags.Spellcheck;
-            }
-
-            if (isTextPredictionEnabled)
-            {
-                flags |= KeyboardFlags.Suggestions;
-            }
-
-            entry.Keyboard = Keyboard.Create(flags);
-        }
-
-        private void OnLeadingIconChanged(string icon)
-        {
-            leadingIcon.Source = icon;
+            leadingIcon.Source = imageSource;
             OnLeadingIconTintColorChanged(LeadingIconTintColor);
         }
 
@@ -1221,7 +1233,8 @@ namespace XF.Material.Forms.UI
 
         private void OnPlaceholderChanged(string placeholderText)
         {
-            placeholder.Text = placeholderText;
+            placeholder.Text = placeholderText ?? string.Empty;
+            UpdatePlaceholderVisibility();
         }
 
         private void OnPlaceholderColorChanged(Color placeholderColor)
@@ -1255,7 +1268,7 @@ namespace XF.Material.Forms.UI
             {
                 throw new InvalidOperationException("The property `Choices` is null or empty");
             }
-            _choices = GetChoices();
+            _choices = GetChoices(out _choicesResults);
 
             var title = MaterialConfirmationDialog.GetDialogTitle(this);
             var confirmingText = MaterialConfirmationDialog.GetDialogConfirmingText(this);
@@ -1275,14 +1288,14 @@ namespace XF.Material.Forms.UI
             if (result >= 0)
             {
                 _selectedIndex = result;
-                Text = _choices[result];
+                Text = _choicesResults[result];
                 // entry.Text = Text;
             }
         }
 
         private void OnTextChanged(string text)
         {
-            if (InputType == MaterialTextFieldInputType.Choice && !string.IsNullOrEmpty(text) && _choices?.Contains(text) == false)
+            if (InputType == MaterialTextFieldInputType.Choice && !string.IsNullOrEmpty(text) && _choicesResults?.Contains(text) == false)
             {
                 Debug.WriteLine($"The `Text` property value `{Text}` does not match any item in the collection `Choices`.");
                 Text = null;
@@ -1303,8 +1316,8 @@ namespace XF.Material.Forms.UI
 
             entry.Text = text;
 
-
             AnimateToInactiveOrFocusedStateOnStart(this);
+            UpdatePlaceholderVisibility();
             UpdateCounter();
         }
 
@@ -1353,12 +1366,6 @@ namespace XF.Material.Forms.UI
 
         private void SetPropertyChangeHandler(ref Dictionary<string, Action> propertyChangeActions)
         {
-            Action keyboardFlagsAction = () => OnKeyboardFlagsChanged(
-                IsAutoCapitalizationEnabled,
-                IsSpellCheckEnabled,
-                IsTextPredictionEnabled,
-                IsTextAllCaps);
-
             propertyChangeActions = new Dictionary<string, Action>
             {
                 { nameof(Text), () => OnTextChanged(Text) },
@@ -1371,7 +1378,6 @@ namespace XF.Material.Forms.UI
                 { nameof(HelperText), () => OnHelperTextChanged(HelperText) },
                 { nameof(HelperTextFontFamily), () => OnHelpertTextFontFamilyChanged(HelperTextFontFamily) },
                 { nameof(HelperTextColor), () => OnHelperTextColorChanged(HelperTextColor) },
-                { nameof(InputType), () => OnInputTypeChanged(InputType) },
                 { nameof(IsEnabled), () => OnEnabledChanged(IsEnabled) },
                 { nameof(BackgroundColor), () => OnBackgroundColorChanged(BackgroundColor) },
                 { nameof(AlwaysShowUnderline), () => OnAlwaysShowUnderlineChanged(AlwaysShowUnderline) },
@@ -1387,13 +1393,27 @@ namespace XF.Material.Forms.UI
                 { nameof(Choices), () => OnChoicesChanged(Choices) },
                 { nameof(LeadingIcon), () => OnLeadingIconChanged(LeadingIcon) },
                 { nameof(LeadingIconTintColor), () => OnLeadingIconTintColorChanged(LeadingIconTintColor) },
-                { nameof(IsSpellCheckEnabled), keyboardFlagsAction },
-                { nameof(IsTextPredictionEnabled), keyboardFlagsAction },
-                { nameof(IsAutoCapitalizationEnabled), keyboardFlagsAction },
-                { nameof(IsTextAllCaps), keyboardFlagsAction },
+                { nameof(InputType), () => OnInputTypeChanged() },
+                { nameof(IsSpellCheckEnabled), () => OnInputTypeChanged() },
+                { nameof(IsTextPredictionEnabled), () => OnInputTypeChanged() },
+                { nameof(IsAutoCapitalizationEnabled), () => OnInputTypeChanged() },
+                { nameof(IsTextAllCaps), () => OnInputTypeChanged() },
                 { nameof(TextFontSize), () => OnTextFontSizeChanged(TextFontSize) },
-                { nameof(ErrorText), () => OnErrorTextChanged() }
+                { nameof(ErrorText), () => OnErrorTextChanged() },
+                { nameof(PlaceholderLineBreakMode), () => OnPlaceholderLineBreakModeChanged()}
             };
+        }
+
+        private void UpdatePlaceholderVisibility()
+        {
+            if (!string.IsNullOrEmpty(Text) && !FloatingPlaceholderEnabled)
+            {
+                placeholder.IsVisible = false;
+            }
+            else if (string.IsNullOrEmpty(Text) && !FloatingPlaceholderEnabled)
+            {
+                placeholder.IsVisible = true;
+            }
         }
 
         private void UpdateCounter()

@@ -2,11 +2,11 @@
 using Android.Content.Res;
 using Android.Graphics;
 using Android.Graphics.Drawables;
-using Android.Support.V4.Content;
-using Android.Support.V4.Graphics;
-using Android.Support.V4.Graphics.Drawable;
-using Android.Support.V4.View;
 using Android.Util;
+using AndroidX.Core.Content;
+using AndroidX.Core.Graphics;
+using AndroidX.Core.Graphics.Drawable;
+using AndroidX.Core.View;
 using Xamarin.Forms.Platform.Android;
 
 namespace XF.Material.Droid
@@ -15,12 +15,12 @@ namespace XF.Material.Droid
     {
         private static DisplayMetrics DisplayMetrics => Material.Context.Resources.DisplayMetrics;
 
-        internal static float ConvertToDp(double value)
+        internal static float ConvertDpToPx(double value)
         {
             return TypedValue.ApplyDimension(ComplexUnitType.Dip, (float)value, DisplayMetrics);
         }
 
-        internal static float ConvertToSp(double value)
+        internal static float ConvertSpToPx(double value)
         {
             return TypedValue.ApplyDimension(ComplexUnitType.Sp, (float)value, DisplayMetrics);
         }
@@ -47,10 +47,10 @@ namespace XF.Material.Droid
             return Color.Argb(Convert.ToInt32(Math.Round(Color.GetAlphaComponent(color) * disabledOpacity)), r, g, b);
         }
 
-        internal static void Elevate(this Android.Views.View view, int elevation)
+        internal static void Elevate(this Android.Views.View view, double elevation)
         {
-            var elevationInDp = ConvertToDp(elevation);
-            ViewCompat.SetElevation(view, elevationInDp);
+            var elevationInPixels = ConvertDpToPx(elevation);
+            ViewCompat.SetElevation(view, elevationInPixels);
         }
 
         internal static Drawable GetDrawableCopy(this Drawable drawable)

@@ -3,10 +3,10 @@ using Android.App;
 using Android.Content;
 using Android.Graphics.Drawables;
 using Android.Runtime;
-using Android.Support.V4.Content;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using AndroidX.Core.Content;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using XF.Material.Droid.Renderers.Internals;
@@ -53,7 +53,7 @@ namespace XF.Material.Droid.Renderers.Internals
             Control.Background = new ColorDrawable(Color.Transparent.ToAndroid());
             Control.SetPadding(0, 0, 0, 0);
             Control.SetIncludeFontPadding(false);
-            Control.SetMinimumHeight((int)MaterialHelper.ConvertToDp(20));
+            Control.SetMinimumHeight((int)MaterialHelper.ConvertDpToPx(20));
 
             //// DEV HINT: This will be used for the future control `MaterialTextArea`.
             //// This removes the 'Next' button and shows a 'Done' button when the device's orientation is in landscape.
