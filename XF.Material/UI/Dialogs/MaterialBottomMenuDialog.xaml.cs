@@ -21,6 +21,11 @@ namespace XF.Material.UI.Dialogs
         public object Id { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public bool Disabled { get; set; }
+
+        /// <summary>
         /// Текст опции
         /// </summary>
         public string Title { get; set; }
@@ -91,15 +96,21 @@ namespace XF.Material.UI.Dialogs
                     Margin = new Thickness(0),
                 };
 
-                container.Clicked += async (s, e) =>
+                if (x.Disabled)
+                    container.Opacity = 0.5f;
+
+                if (!x.Disabled)
                 {
-                    await DismissAsync();
-                    InputTaskCompletionSource?.SetResult(x);
-                };
+                    container.Clicked += async (s, e) =>
+                    {
+                        await DismissAsync();
+                        InputTaskCompletionSource?.SetResult(x);
+                    };
+                }
 
                 var view = new StackLayout();
                 view.Orientation = StackOrientation.Horizontal;
-                
+
                 view.VerticalOptions = LayoutOptions.Center;
                 view.Padding = new Thickness(2, 1, 2, 1);
 
