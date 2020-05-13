@@ -267,6 +267,7 @@ namespace XF.Material.UI.Dialogs
 
             Close.ClickCommand = new Command(async () =>
             {
+                Close.ClickCommand = null;
                 await DismissAsync();
                 InputTaskCompletionSource?.SetResult(false);
             });
