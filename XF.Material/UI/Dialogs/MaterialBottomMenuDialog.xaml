@@ -7,7 +7,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:ui="clr-namespace:XF.Material.Forms.UI"
              mc:Ignorable="d"
-             x:Class="XF.Material.UI.Dialogs.MaterialBottomMenuDialog">
+             x:Class="XF.Material.UI.Dialogs.MaterialBottomMenuDialog"
+             HasSystemPadding="False">
 
     <ContentPage.Content>
 
@@ -64,6 +65,13 @@
                     <!--Внутренний контент диалога-->
                     <ui:MaterialCard x:Name="Content" Elevation="0" HasShadow="False" CornerRadius="0" Padding="0" Margin="0">
                     </ui:MaterialCard>
+
+                    <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
+                    <StackLayout x:Name="systemPadding">
+                        <StackLayout.BackgroundColor>
+                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="White" />
+                        </StackLayout.BackgroundColor>
+                    </StackLayout>
 
                 </StackLayout>
 

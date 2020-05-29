@@ -254,6 +254,14 @@ namespace XF.Material.UI.Dialogs
             ChangeLayout();
         }
 
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
+            base.OnPropertyChanged(propertyName);
+
+            if (propertyName == nameof(SystemPadding))
+                systemPadding.HeightRequest = SystemPadding.Bottom;
+        }
+
         private void ChangeLayout()
         {
             switch (DisplayOrientation)
