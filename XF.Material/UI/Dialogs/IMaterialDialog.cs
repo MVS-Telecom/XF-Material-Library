@@ -44,7 +44,7 @@ namespace XF.Material.Forms.UI.Dialogs
         /// <param name="confirmingText">The text of the confirmation button.</param>
         /// <param name="dismissiveText">The text of the dismissive button</param>
         /// <param name="configuration">The style of the alert dialog.</param>
-        Task<bool?> ConfirmAsync(string message, string title = null, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialAlertDialogConfiguration configuration = null);
+        Task<bool?> ConfirmAsync(FormattedString message, string title = null, string confirmingText = "Ok", string dismissiveText = "Cancel", MaterialAlertDialogConfiguration configuration = null);
 
         /// <summary>
         /// Shows a confirmation dialog that allow users to input text. If confirmed, returns the text value of the textfield. If canceled or dismissed, returns <see cref="string.Empty"/>.

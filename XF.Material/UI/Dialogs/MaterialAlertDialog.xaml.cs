@@ -9,9 +9,9 @@ namespace XF.Material.Forms.UI.Dialogs
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MaterialAlertDialog : BaseMaterialModalPage, IMaterialAwaitableDialog<bool?>
     {
-        internal MaterialAlertDialog(string message, string title, string action1Text, string action2Text, MaterialAlertDialogConfiguration configuration = null) : this(configuration)
+        internal MaterialAlertDialog(FormattedString message, string title, string action1Text, string action2Text, MaterialAlertDialogConfiguration configuration = null) : this(configuration)
         {
-            Message.Text = message;
+            Message.FormattedText = message;
             DialogTitle.Text = title;
             PositiveButton.Text = action1Text;
             PositiveButton.Command = new Command(async () =>
@@ -49,7 +49,7 @@ namespace XF.Material.Forms.UI.Dialogs
             await dialog.ShowAsync();
         }
 
-        internal static async Task<bool?> ConfirmAsync(string message, string title, string confirmingText, string dismissiveText = "Cancel", MaterialAlertDialogConfiguration configuration = null)
+        internal static async Task<bool?> ConfirmAsync(FormattedString message, string title, string confirmingText, string dismissiveText = "Cancel", MaterialAlertDialogConfiguration configuration = null)
         {
             var dialog = new MaterialAlertDialog(message, title, confirmingText, dismissiveText, configuration)
             {

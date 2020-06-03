@@ -45,7 +45,7 @@ namespace XF.Material.Forms.UI.Dialogs
         }
 
         public Task<bool?> ConfirmAsync(
-            string message,
+            FormattedString message,
             string title = null,
             string confirmingText = "Ok",
             string dismissiveText = "Cancel",
