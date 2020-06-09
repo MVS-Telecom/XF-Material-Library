@@ -23,7 +23,7 @@ namespace XF.Material.Droid.Renderers
             }
 
             var materialElement = Element as MaterialCircularLoadingView;
-            Control.SetAnimation(Resource.Raw.loading_animation);
+            //Control.SetAnimation(Resource.Raw.loading_animation);
             Control.SetScaleType(scaleType: ScaleType.CenterCrop);
             if (materialElement != null)
             {
