@@ -230,8 +230,8 @@ namespace XF.Material.UI.Dialogs
             {
                 if (onAction == null)
                 {
+                    ok = true;
                     await DismissAsync();
-                    InputTaskCompletionSource?.SetResult(true);
                 }
 
                 ActionButton.IsClickable = ActionButton.IsEnabled = false;
@@ -242,8 +242,8 @@ namespace XF.Material.UI.Dialogs
                 {
                     if (await onAction())
                     {
+                        ok = true;
                         await DismissAsync();
-                        InputTaskCompletionSource?.SetResult(true);
                     }
                 }
                 finally
@@ -268,10 +268,11 @@ namespace XF.Material.UI.Dialogs
             Close.ClickCommand = new Command(async () =>
             {
                 Close.ClickCommand = null;
+                ok = false;
                 await DismissAsync();
-                InputTaskCompletionSource?.SetResult(false);
             });
 
+            PopupNavigation.Instance.Popping += Instance_Popping;
 
             Animation = new MaterialBottomSheetAnimation(MoveAnimationOptions.Bottom, MoveAnimationOptions.Bottom);
 
@@ -286,6 +287,17 @@ namespace XF.Material.UI.Dialogs
             //};
         }
 
+        bool ok = false;
+
+        private async void Instance_Popping(object sender, Rg.Plugins.Popup.Events.PopupNavigationEventArgs e)
+        {
+            if (e.Page == this)
+            {
+                PopupNavigation.Instance.Popping -= Instance_Popping;
+                await DismissAsync();
+                InputTaskCompletionSource?.SetResult(ok);
+            }
+        }
 
         internal MaterialBottomDialog(BottomSheetDialogConfiguration configuration = null)
         {
