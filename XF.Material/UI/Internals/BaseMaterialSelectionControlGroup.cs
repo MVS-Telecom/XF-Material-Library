@@ -23,6 +23,11 @@ namespace XF.Material.Forms.UI.Internals
         string Text { get; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        string Description { get; }
+
+        /// <summary>
         /// Is item enabled?
         /// </summary>
         bool IsEnabled { get; }
@@ -42,6 +47,11 @@ namespace XF.Material.Forms.UI.Internals
         /// <inheritdoc/>
         /// </summary>
         public string Text { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Description { get; set; }
 
         /// <summary>
         /// <inheritdoc/>

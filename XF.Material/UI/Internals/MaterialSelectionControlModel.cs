@@ -13,8 +13,8 @@ namespace XF.Material.Forms.UI.Internals
             set => Set(ref _index, value);
         }
 
-        private string _text;
-        public string Text
+        private FormattedString _text;
+        public FormattedString Text
         {
             get => _text;
             set => Set(ref _text, value);

@@ -54,6 +54,11 @@ namespace XF.Material.Forms.UI.Internals
         public static readonly BindableProperty TextProperty = BindableProperty.Create(nameof(Text), typeof(string), typeof(BaseMaterialSelectionControl), string.Empty);
 
         /// <summary>
+        /// 
+        /// </summary>
+        public static readonly BindableProperty FormattedTextProperty = BindableProperty.Create(nameof(FormattedText), typeof(FormattedString), typeof(BaseMaterialSelectionControl), null);
+
+        /// <summary>
         /// Backing field for the bindable property <see cref="UnselectedColor"/>.
         /// </summary>
         public static readonly BindableProperty UnselectedColorProperty = BindableProperty.Create(nameof(UnselectedColor), typeof(Color), typeof(BaseMaterialSelectionControl), Color.FromHex("#84000000"));
@@ -151,6 +156,15 @@ namespace XF.Material.Forms.UI.Internals
         }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public FormattedString FormattedText
+        {
+            get => (FormattedString)GetValue(FormattedTextProperty);
+            set => SetValue(FormattedTextProperty, value);
+        }
+
+        /// <summary>
         /// Gets or sets the selection control's text color.
         /// </summary>
         public Color TextColor
@@ -232,6 +246,11 @@ namespace XF.Material.Forms.UI.Internals
             selectionText.Text = Text;
         }
 
+        private void OnFormattedTextChanged()
+        {
+            selectionText.FormattedText = FormattedText;
+        }
+
 
         private void OnTextColorChanged()
         {
@@ -277,6 +296,7 @@ namespace XF.Material.Forms.UI.Internals
             propertyChangeActions = new Dictionary<string, Action>
             {
                 { nameof(Text), OnTextChanged },
+                { nameof(FormattedText), OnFormattedTextChanged },
                 { nameof(TextColor), OnTextColorChanged },
                 { nameof(IsSelected), () => OnSelectedChanged(IsSelected) },
                 { nameof(SelectedColor), () => OnStateColorChanged(IsSelected) },

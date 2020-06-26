@@ -17,7 +17,7 @@
                                                IsEnabled="{Binding IsEnabled}"
                                                SelectedChangeCommand="{Binding SelectedChangeCommand}"
                                                SelectedColor="{Binding Source={x:Reference root}, Path=SelectedColor}"
-                                               Text="{Binding Text}"
+                                               FormattedText="{Binding Text}"
                                                TextColor="{Binding Source={x:Reference root}, Path=TextColor}"
                                                UnselectedColor="{Binding Source={x:Reference root}, Path=UnselectedColor}"
                                                VerticalSpacing="{Binding Source={x:Reference root}, Path=VerticalSpacing}" />

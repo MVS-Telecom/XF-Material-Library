@@ -76,10 +76,19 @@ namespace XF.Material.Forms.UI
 
             for (var i = 0; i < Choices.Count; i++)
             {
+                var text = new FormattedString();
+                text.Spans.Add(new Span() { Text = Choices[i].Text });
+
+                if (!string.IsNullOrEmpty(Choices[i].Description))
+                {
+                    text.Spans.Add(new Span() { Text = Environment.NewLine });
+                    text.Spans.Add(new Span() { Text = Choices[i].Description, FontSize = 13, TextColor = Color.Gray });
+                }
+
                 var model = new MaterialSelectionControlModel
                 {
                     Index = i,
-                    Text = Choices[i].Text,
+                    Text = text,
                     IsEnabled = Choices[i].IsEnabled,
                 };
                 model.SelectedChangeCommand = new Command<bool>((isSelected) => RadioButtonSelected(isSelected, model));
