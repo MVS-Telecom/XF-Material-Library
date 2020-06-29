@@ -52,6 +52,7 @@
                                     InputTransparent="True"
                                     TextColor="#DE000000"
                                     TypeScale="Body1"
+                                    LineHeight="1"
                                     VerticalOptions="Center"
                                     WidthRequest="1000">
                 <Label.Triggers>
