@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -7,8 +8,27 @@ using XF.Material.Forms.UI.Dialogs.Configurations;
 namespace XF.Material.Forms.UI.Dialogs
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MaterialLoadingDialog : BaseMaterialModalPage
+    public partial class MaterialLoadingDialog : BaseMaterialModalPage, IMaterialLoadingModalPage
     {
+        public double Progress
+        {
+            get
+            {
+                if (!progress.IsVisible)
+                    throw new InvalidOperationException();
+
+                return progress.Progress;
+            }
+            set
+            {
+                if (!progress.IsVisible)
+                    throw new InvalidOperationException();
+
+                progress.Progress = value;
+            }
+        }
+
+
         internal MaterialLoadingDialog(string message, MaterialLoadingDialogConfiguration configuration)
         {
             InitializeComponent();
@@ -34,7 +54,8 @@ namespace XF.Material.Forms.UI.Dialogs
 
         internal static MaterialLoadingDialogConfiguration GlobalConfiguration { get; set; }
 
-        internal static async Task<IMaterialModalPage> Loading(string message, MaterialLoadingDialogConfiguration configuration = null)
+
+        internal static async Task<IMaterialLoadingModalPage> Loading(string message, MaterialLoadingDialogConfiguration configuration = null)
         {
             var dialog = new MaterialLoadingDialog(message, configuration);
             await dialog.ShowAsync();
@@ -95,8 +116,12 @@ namespace XF.Material.Forms.UI.Dialogs
             Container.BackgroundColor = preferredConfig.BackgroundColor;
             Message.TextColor = preferredConfig.MessageTextColor;
             Message.FontFamily = preferredConfig.MessageFontFamily;
-            LoadingImage.Color = preferredConfig.TintColor;
+            loading.Color = preferredConfig.TintColor;
+            progress.Color = preferredConfig.TintColor;
             Container.Margin = preferredConfig.Margin == default ? Material.GetResource<Thickness>("Material.Dialog.Margin") : preferredConfig.Margin;
+
+            loading.IsVisible = !preferredConfig.WithProgress;
+            progress.IsVisible = preferredConfig.WithProgress;
         }
     }
 }

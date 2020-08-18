@@ -15,4 +15,12 @@ namespace XF.Material.Forms.UI.Dialogs
         /// </summary>
         Task DismissAsync();
     }
+
+    public interface IMaterialLoadingModalPage : IMaterialModalPage
+    {
+        /// <summary>
+        /// 
+        /// </summary>
+        double Progress { get; set; }
+    }
 }

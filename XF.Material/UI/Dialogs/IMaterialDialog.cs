@@ -63,14 +63,7 @@ namespace XF.Material.Forms.UI.Dialogs
         /// </summary>
         /// <param name="message">The message of the dialog.</param>
         /// <param name="configuration">The style of the loading dialog.</param>
-        Task<IMaterialModalPage> LoadingDialogAsync(string message, MaterialLoadingDialogConfiguration configuration = null);
-
-        /// <summary>
-        /// Shows a dialog indicating a running task.
-        /// </summary>
-        /// <param name="message">The message of the dialog.</param>
-        /// <param name="configuration">The style of the loading dialog.</param>
-        Task<IMaterialModalPage> LoadingDialogAsync(string message, string lottieAnimation, MaterialLoadingDialogConfiguration configuration = null);
+        Task<IMaterialLoadingModalPage> LoadingDialogAsync(string message, MaterialLoadingDialogConfiguration configuration = null);
 
         /// <summary>
         /// Shows a snackbar indicating a running task.
