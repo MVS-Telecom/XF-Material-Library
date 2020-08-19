@@ -54,6 +54,11 @@ namespace XF.Material.UI.Dialogs
         /// Показать разделитель
         /// </summary>
         public bool? ShowDividerAbove { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public double? OverrideIconSize { get; set; }
     }
 
 
@@ -122,10 +127,12 @@ namespace XF.Material.UI.Dialogs
 
                     var icon = new MaterialIcon()
                     {
-                        WidthRequest = 21,
-                        HeightRequest = 21,
+                        WidthRequest = x.OverrideIconSize ?? 21,
+                        HeightRequest = x.OverrideIconSize ?? 21,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center,
                         Source = x.IconSource,
-                        Opacity = x.IconOpacity ?? 0.9f
+                        Opacity = x.IconOpacity ?? 0.9f,
                     };
 
                     if (!x.IgnoreTint)
@@ -133,10 +140,12 @@ namespace XF.Material.UI.Dialogs
 
                     view.Children.Add(new MaterialCard()
                     {
+                        WidthRequest = 48,
+                        HeightRequest = 48,
                         Elevation = 0,
                         CornerRadius = 25,
                         Margin = 0,
-                        Padding = new Thickness(14),
+                        Padding = new Thickness(0),
                         VerticalOptions = LayoutOptions.Center,
                         BackgroundColor = (Color)Application.Current.Resources["BottomSheet_IconBackground"],
                         Content = icon
