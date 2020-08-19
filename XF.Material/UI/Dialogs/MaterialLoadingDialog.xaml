@@ -39,6 +39,7 @@
                 <controls:MaterialCircleProgressView x:Name="progress" 
                                              WidthRequest="28"  
                                              HeightRequest="28"
+                                             IsVisible="False"
                                              Grid.Column="0" 
                                              VerticalOptions="Center"
                                              HorizontalOptions="Center"    
