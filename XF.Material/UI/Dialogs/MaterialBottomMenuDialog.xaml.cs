@@ -160,7 +160,7 @@ namespace XF.Material.UI.Dialogs
 
                 view.Children.Add(new MaterialLabel()
                 {
-                    Padding = new Thickness(10, 1),
+                    Padding = new Thickness(10, 5),
                     TypeScale = MaterialTypeScale.Body1,
                     //FontSize = 17,
                     //TypeScale = MaterialTypeScale.Body1,
