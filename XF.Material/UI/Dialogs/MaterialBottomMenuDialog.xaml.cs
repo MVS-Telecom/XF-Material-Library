@@ -68,6 +68,7 @@ namespace XF.Material.UI.Dialogs
         public bool HideCloseButton { get; set; }
         public Color? ActionButtonColor { get; set; }
         public bool? CloseWhenBackgroundIsClicked { get; set; }
+        public Thickness? Margin { get; set; }
     }
 
 
@@ -292,6 +293,7 @@ namespace XF.Material.UI.Dialogs
 
             Close.IsVisible = !preferredConfig.HideCloseButton;
             CloseWhenBackgroundIsClicked = preferredConfig.CloseWhenBackgroundIsClicked ?? true;
+            (Container.Parent as View).Margin = preferredConfig.Margin ?? new Thickness(0);
         }
 
     }
