@@ -235,10 +235,28 @@ namespace XF.Material.Forms.Controls
         {
             time.Stop();
 
-            float a = (float)(time.ElapsedMilliseconds / drawInterval.TotalMilliseconds);
+            float a = (float)Math.Max(0.1, Math.Min(10, time.ElapsedMilliseconds / drawInterval.TotalMilliseconds));
 
             time.Reset();
             time.Start();
+
+
+            _progress += 0.05f * a;
+            _progress = Math.Min(1, _progress);
+
+            if (Animate)
+                _rotate += 8f * a;
+
+            if ((Animate && Progress > 0 && Progress < 100) || (_progress > 0 && _progress < 1))
+            {
+                Device.StartTimer(drawInterval, () =>
+                {
+                    InvalidateLayout();
+                    return false;
+                });
+            }
+
+
 
             var canvas = e.Surface.Canvas;
             canvas.Clear();
@@ -260,20 +278,7 @@ namespace XF.Material.Forms.Controls
             canvas.DrawPath(pathBackground, paintBackground);
 
 
-            _progress += 0.05f * a;
-            _progress = Math.Min(1, _progress);
 
-            if (Animate)
-                _rotate += 8f * a;
-
-            if ((Animate && Progress > 0 && Progress < 100) || (_progress > 0 && _progress < 1))
-            {
-                Device.StartTimer(drawInterval, () =>
-                {
-                    InvalidateLayout();
-                    return false;
-                });
-            }
 
         }
 
