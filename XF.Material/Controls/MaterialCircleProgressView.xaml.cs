@@ -265,7 +265,7 @@ namespace XF.Material.Forms.Controls
             if ((Animate && Progress > 0 && Progress < 100) || (_progress > 0 && _progress < 1))
             {
                 await Task.Delay((int)(20 * k));
-                InvalidateLayout();
+                this.canvas.InvalidateSurface();
             }
 
         }
