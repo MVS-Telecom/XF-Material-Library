@@ -2,6 +2,7 @@
 using SkiaSharp.Views.Forms;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -188,11 +189,6 @@ namespace XF.Material.Forms.Controls
             UpdatePaint();
             InitializeComponent();
             canvas.PaintSurface += Canvas_PaintSurface;
-
-            if (Device.RuntimePlatform == Device.iOS)
-                k = 1;
-            else
-                k = 1;
         }
 
 
@@ -227,15 +223,23 @@ namespace XF.Material.Forms.Controls
         private float _progress = 0;
         private float _rotate = 0;
         const int padding = 2;
-        private readonly float k = 1;
+        private Stopwatch time = new Stopwatch();
+        private TimeSpan drawInterval = TimeSpan.FromMilliseconds(20);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private async void Canvas_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
+        private void Canvas_PaintSurface(object sender, SkiaSharp.Views.Forms.SKPaintSurfaceEventArgs e)
         {
+            time.Stop();
+
+            float a = (float)(time.ElapsedMilliseconds / drawInterval.TotalMilliseconds);
+
+            time.Reset();
+            time.Start();
+
             var canvas = e.Surface.Canvas;
             canvas.Clear();
 
@@ -256,16 +260,19 @@ namespace XF.Material.Forms.Controls
             canvas.DrawPath(pathBackground, paintBackground);
 
 
-            _progress += 0.05f * k;
+            _progress += 0.05f * a;
             _progress = Math.Min(1, _progress);
 
             if (Animate)
-                _rotate += 8f * k;
+                _rotate += 8f * a;
 
             if ((Animate && Progress > 0 && Progress < 100) || (_progress > 0 && _progress < 1))
             {
-                await Task.Delay((int)(20 * k));
-                this.canvas.InvalidateSurface();
+                Device.StartTimer(drawInterval, () =>
+                {
+                    InvalidateLayout();
+                    return false;
+                });
             }
 
         }
