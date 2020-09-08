@@ -1,10 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8" ?>
-<internal:BaseMaterialSelectionControlGroup x:Class="XF.Material.Forms.UI.MaterialRadioButtonGroup"
-                                            xmlns="http://xamarin.com/schemas/2014/forms"
-                                            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-                                            xmlns:internal="clr-namespace:XF.Material.Forms.UI.Internals"
-                                            xmlns:local="clr-namespace:XF.Material.Forms.UI"
-                                            x:Name="root">
+<internal:BaseMaterialSelectionControlGroup
+    x:Class="XF.Material.Forms.UI.MaterialRadioButtonGroup"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:internal="clr-namespace:XF.Material.Forms.UI.Internals"
+    xmlns:local="clr-namespace:XF.Material.Forms.UI"
+    x:Name="root">
     <ContentView.Content>
         <StackLayout x:Name="selectionList"
                      Spacing="0">
