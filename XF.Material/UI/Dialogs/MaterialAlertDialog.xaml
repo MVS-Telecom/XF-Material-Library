@@ -9,7 +9,7 @@
         <material:MaterialCard x:Name="Container"
                                Margin="{DynamicResource Material.Dialog.Margin}"
                                Padding="0"
-                               BackgroundColor="White"
+                               BackgroundColor="{DynamicResource bg}"
                                CornerRadius="4"
                                Elevation="24"
                                HasShadow="True"
@@ -26,7 +26,7 @@
                 <material:MaterialLabel x:Name="DialogTitle"
                                         Grid.Row="0"
                                         Margin="24,20,24,12"
-                                        TextColor="#DE000000"
+                                        TextColor="{DynamicResource fg}"
                                         TypeScale="H6"
                                         VerticalOptions="Start">
                     <Label.Triggers>
@@ -42,7 +42,7 @@
                                         Grid.Row="1"
                                         Margin="24,8,24,0"
                                         Text="Lorem ipsum dolor sit amet, conse tetuer adipiscing elit. Aenean commodo ligula eget dolor."
-                                        TextColor="#99000000"
+                                        TextColor="{DynamicResource second_fg}"
                                         TypeScale="Body1">
                     <Label.Triggers>
                         <DataTrigger Binding="{Binding Source={x:Reference DialogTitle}, Path=IsVisible}"

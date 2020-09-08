@@ -12,7 +12,7 @@
         <material:MaterialCard x:Name="Container"
                                Margin="{DynamicResource Material.Dialog.Margin}"
                                Padding="0"
-                               BackgroundColor="White"
+                               BackgroundColor="{DynamicResource bg}"
                                CornerRadius="4"
                                Elevation="24"
                                HasShadow="True"

@@ -10,7 +10,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the title text color of the alert dialog.
         /// </summary>
-        public Color TitleTextColor { get; set; } = Color.FromHex("#DE000000");
+        public Color TitleTextColor { get; set; } = (Color)Application.Current.Resources["fg"];
 
         /// <summary>
         /// Gets or sets the title font family of the alert dialog.

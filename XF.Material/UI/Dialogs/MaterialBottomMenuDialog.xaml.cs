@@ -164,7 +164,7 @@ namespace XF.Material.UI.Dialogs
                     TypeScale = MaterialTypeScale.Body1,
                     //FontSize = 17,
                     //TypeScale = MaterialTypeScale.Body1,
-                    TextColor = (Color)Application.Current.Resources["BottomSheet_TextColor"],// Color.Black,
+                    TextColor = (Color)Application.Current.Resources["fg"],
                     //FontAttributes = FontAttributes.Bold,
                     Text = x.Title,
                     LineHeight = 1,

@@ -7,7 +7,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the title text color of the dialog.
         /// </summary>
-        public Color TitleTextColor { get; set; } = Color.FromHex("#DE000000");
+        public Color TitleTextColor { get; set; } = (Color)Application.Current.Resources["fg"];
 
         /// <summary>
         /// Gets or sets the title font family of the dialog.
@@ -17,7 +17,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the body text color.
         /// </summary>
-        public Color TextColor { get; set; } = Color.FromHex("#DE000000");
+        public Color TextColor { get; set; } = (Color)Application.Current.Resources["fg"];
 
         /// <summary>
         /// Gets or sets the corner radius of the dialog.

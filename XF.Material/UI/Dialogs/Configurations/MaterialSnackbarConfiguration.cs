@@ -10,7 +10,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the background color of the snackbar.
         /// </summary>
-        public override Color BackgroundColor { get; set; } = Color.FromHex("#343434");
+        public override Color BackgroundColor { get; set; } = (Color)Application.Current.Resources["second_bg"];
 
         /// <summary>
         /// Gets or sets whether the button's label text of the snackbar should all be capitalized or not.
@@ -30,7 +30,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the color of the snackbar's message text.
         /// </summary>
-        public override Color MessageTextColor { get; set; } = Color.FromHex("#DEFFFFFF");
+        public override Color MessageTextColor { get; set; } = (Color)Application.Current.Resources["fg"];
 
         /// <summary>
         /// Gets or sets the tint color to be used for the snackbar's button.

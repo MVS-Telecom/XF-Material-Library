@@ -10,17 +10,18 @@
                      Spacing="0">
             <BindableLayout.ItemTemplate>
                 <DataTemplate>
-                    <local:MaterialRadioButton FontFamily="{Binding Source={x:Reference root}, Path=FontFamily}"
-                                               FontSize="{Binding Source={x:Reference root}, Path=FontSize}"
-                                               HorizontalSpacing="{Binding Source={x:Reference root}, Path=HorizontalSpacing}"
-                                               IsSelected="{Binding IsSelected}"
-                                               IsEnabled="{Binding IsEnabled}"
-                                               SelectedChangeCommand="{Binding SelectedChangeCommand}"
-                                               SelectedColor="{Binding Source={x:Reference root}, Path=SelectedColor}"
-                                               FormattedText="{Binding Text}"
-                                               TextColor="{Binding Source={x:Reference root}, Path=TextColor}"
-                                               UnselectedColor="{Binding Source={x:Reference root}, Path=UnselectedColor}"
-                                               VerticalSpacing="{Binding Source={x:Reference root}, Path=VerticalSpacing}" />
+                    <local:MaterialRadioButton
+                        FontFamily="{Binding Source={x:Reference root}, Path=FontFamily}"
+                        FontSize="{Binding Source={x:Reference root}, Path=FontSize}"
+                        HorizontalSpacing="{Binding Source={x:Reference root}, Path=HorizontalSpacing}"
+                        IsSelected="{Binding IsSelected}"
+                        IsEnabled="{Binding IsEnabled}"
+                        SelectedChangeCommand="{Binding SelectedChangeCommand}"
+                        SelectedColor="{Binding Source={x:Reference root}, Path=SelectedColor}"
+                        FormattedText="{Binding Text}"
+                        TextColor="{Binding Source={x:Reference root}, Path=TextColor}"
+                        UnselectedColor="{Binding Source={x:Reference root}, Path=UnselectedColor}"
+                        VerticalSpacing="{Binding Source={x:Reference root}, Path=VerticalSpacing}" />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>
         </StackLayout>

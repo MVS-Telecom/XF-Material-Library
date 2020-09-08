@@ -15,7 +15,7 @@
 
         <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
 
-            <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" BackgroundColor="White" ExtendedCornerRadius="16,16,0,0" Margin="0" Padding="0">
+            <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" BackgroundColor="{DynamicResource bg}" ExtendedCornerRadius="16,16,0,0" Margin="0" Padding="0">
                 <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="Transparent">
 
                     <Frame x:Name="DragAnchor" HasShadow="False" IsVisible="False" IsEnabled="True" Padding="0,12,0,8" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
@@ -28,7 +28,7 @@
                         <ui:MaterialLabel x:Name="Title" 
                                         VerticalOptions="Center"
                                         LineHeight="1"
-                                        TextColor="Black"
+                                        TextColor="{DynamicResource fg}"
                                         FontSize="18">
 
                             <ui:MaterialLabel.FontFamily>
@@ -67,7 +67,7 @@
                     <ui:MaterialCard x:Name="ActionButton" IsClickable="True" Margin="23,12,23,16" CornerRadius="7" Elevation="0" HasShadow="False" Padding="18,15" BackgroundColor="{StaticResource BottomSheet_ActionButtonColor}">
                         <StackLayout>
 
-                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="15" VerticalTextAlignment="Center" Padding="1" TextColor="White">
+                            <ui:MaterialLabel x:Name="text" HorizontalOptions="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" FontSize="15" VerticalTextAlignment="Center" Padding="1" TextColor="{DynamicResource fg}">
                                 <ui:MaterialLabel.FontFamily>
                                     <OnPlatform x:TypeArguments="x:String">
                                         <On Platform="Android" Value="sans-serif-medium" />
@@ -80,16 +80,14 @@
                                 </ui:MaterialLabel.FontAttributes>
                             </ui:MaterialLabel>
 
-                            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" WidthRequest="22" HeightRequest="22" Margin="0" IsRunning="true" Color="White" />
+                            <ActivityIndicator x:Name="activityIndicator" IsVisible="False" WidthRequest="22" HeightRequest="22" Margin="0" IsRunning="true" Color="{DynamicResource fg}" />
                         </StackLayout>
                     </ui:MaterialCard>
 
 
                     <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
-                    <StackLayout x:Name="systemPadding">
-                        <StackLayout.BackgroundColor>
-                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="White" />
-                        </StackLayout.BackgroundColor>
+                    <StackLayout x:Name="systemPadding" BackgroundColor="{DynamicResource bg}">
+
                     </StackLayout>
 
                 </StackLayout>

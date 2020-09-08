@@ -25,6 +25,6 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the color of this selection control when unselected.
         /// </summary>
-        public Color ControlUnselectedColor { get; set; } = Color.FromHex("#84000000");
+        public Color ControlUnselectedColor { get; set; } = (Color)Application.Current.Resources["second_fg"];
     }
 }

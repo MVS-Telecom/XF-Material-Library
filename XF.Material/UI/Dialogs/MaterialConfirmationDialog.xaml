@@ -6,17 +6,18 @@
                              xmlns:material="clr-namespace:XF.Material.Forms.UI"
                              xmlns:sys="clr-namespace:System;assembly=netstandard">
     <ContentPage.Content>
-        <material:MaterialCard x:Name="Container"
-                               Margin="{DynamicResource Material.Dialog.Margin}"
-                               Padding="0"
-                               BackgroundColor="White"
-                               CornerRadius="4"
-                               Elevation="24"
-                               HasShadow="True"
-                               HorizontalOptions="Center"
-                               IsClippedToBounds="True"
-                               VerticalOptions="Center"
-                               WidthRequest="{StaticResource Material.Dialog.Width}">
+        <material:MaterialCard
+            x:Name="Container"
+            Margin="{DynamicResource Material.Dialog.Margin}"
+            Padding="0"
+            BackgroundColor="{DynamicResource bg}"
+            CornerRadius="4"
+            Elevation="24"
+            HasShadow="True"
+            HorizontalOptions="Center"
+            IsClippedToBounds="True"
+            VerticalOptions="Center"
+            WidthRequest="{StaticResource Material.Dialog.Width}">
             <Grid RowSpacing="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -25,12 +26,13 @@
                     <RowDefinition Height="1" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <material:MaterialLabel x:Name="DialogTitle"
-                                        Grid.Row="0"
-                                        Margin="24,22,24,22"
-                                        TextColor="#DE000000"
-                                        TypeScale="H6"
-                                        VerticalOptions="Start">
+                <material:MaterialLabel
+                    x:Name="DialogTitle"
+                    Grid.Row="0"
+                    Margin="24,22,24,22"
+                    TextColor="{DynamicResource fg}"
+                    TypeScale="H6"
+                    VerticalOptions="Start">
                     <Label.Triggers>
                         <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
                             <Setter Property="IsVisible" Value="False" />
@@ -41,21 +43,24 @@
                     </Label.Triggers>
                 </material:MaterialLabel>
                 <BoxView Grid.Row="1"
-                         BackgroundColor="#E0E0E0" />
-                <ScrollView x:Name="container"
-                            Grid.Row="2"
-                            Margin="8,0,8,0"
-                            Padding="0">
+                         BackgroundColor="{DynamicResource second_bg}" />
+                <ScrollView
+                    x:Name="container"
+                    Grid.Row="2"
+                    Margin="8,0,8,0"
+                    Padding="0">
                     <View.Triggers>
-                        <DataTrigger Binding="{Binding Source={x:Reference DialogTitle}, Path=IsVisible}"
-                                     TargetType="View"
-                                     Value="False">
+                        <DataTrigger
+                            Binding="{Binding Source={x:Reference DialogTitle}, Path=IsVisible}"
+                            TargetType="View"
+                            Value="False">
                             <Setter Property="Margin" Value="8,20,8,0" />
                         </DataTrigger>
                     </View.Triggers>
                 </ScrollView>
-                <BoxView Grid.Row="3"
-                         BackgroundColor="#E0E0E0" />
+                <BoxView
+                    Grid.Row="3"
+                    BackgroundColor="#E0E0E0" />
                 <Grid Grid.Row="4"
                       Margin="0,0,8,0"
                       ColumnSpacing="0">
@@ -68,12 +73,13 @@
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <material:MaterialButton x:Name="NegativeButton"
-                                             Grid.Column="2"
-                                             Margin="0,0,-8,0"
-                                             ButtonType="Text"
-                                             Text="Cancel"
-                                             VerticalOptions="Center">
+                    <material:MaterialButton
+                        x:Name="NegativeButton"
+                        Grid.Column="2"
+                        Margin="0,0,-8,0"
+                        ButtonType="Text"
+                        Text="Cancel"
+                        VerticalOptions="Center">
                         <material:MaterialButton.Triggers>
                             <Trigger TargetType="Button" Property="Text" Value="{x:Null}">
                                 <Setter Property="IsVisible" Value="False" />
@@ -85,12 +91,13 @@
                             </Trigger>
                         </material:MaterialButton.Triggers>
                     </material:MaterialButton>
-                    <material:MaterialButton x:Name="PositiveButton"
-                                             Grid.Column="3"
-                                             ButtonType="Text"
-                                             IsEnabled="False"
-                                             Text="Ok"
-                                             VerticalOptions="Center" />
+                    <material:MaterialButton
+                        x:Name="PositiveButton"
+                        Grid.Column="3"
+                        ButtonType="Text"
+                        IsEnabled="False"
+                        Text="Ok"
+                        VerticalOptions="Center" />
                 </Grid>
             </Grid>
         </material:MaterialCard>

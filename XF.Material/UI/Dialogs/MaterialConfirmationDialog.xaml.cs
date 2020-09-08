@@ -115,7 +115,8 @@ namespace XF.Material.Forms.UI.Dialogs
                 {
                     HorizontalSpacing = 20,
                     Choices = choices ?? throw new ArgumentNullException(nameof(choices)),
-                    SelectedIndex = selectedIndex
+                    SelectedIndex = selectedIndex,
+                    UnselectedColor = (Color)Application.Current.Resources["second_fg"]
                 }
             };
 
@@ -146,7 +147,8 @@ namespace XF.Material.Forms.UI.Dialogs
                 _checkboxGroup = new MaterialCheckboxGroup
                 {
                     HorizontalSpacing = 20,
-                    Choices = choices ?? throw new ArgumentNullException(nameof(choices))
+                    Choices = choices ?? throw new ArgumentNullException(nameof(choices)),
+                    UnselectedColor = (Color)Application.Current.Resources["second_fg"]
                 }
             };
 

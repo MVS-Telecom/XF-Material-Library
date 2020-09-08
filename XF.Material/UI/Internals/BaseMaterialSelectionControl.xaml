@@ -19,42 +19,46 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <material:MaterialButton x:Name="selectionButton"
-                                     Grid.ColumnSpan="2"
-                                     Margin="-6"
-                                     ButtonType="Text"
-                                     CornerRadius="0"
-                                     HeightRequest="24"
-                                     HorizontalOptions="FillAndExpand"
-                                     IsVisible="{Binding Source={x:Reference selectionText}, Path=IsVisible}"
-                                     Text="{x:Null}"
-                                     WidthRequest="24" />
-            <material:MaterialButton x:Name="iconButton"
-                                     Grid.Column="0"
-                                     ButtonType="Text"
-                                     CornerRadius="18"
-                                     HorizontalOptions="Center"
-                                     Text="{x:Null}"
-                                     VerticalOptions="Center"
-                                     WidthRequest="48" />
-            <material:MaterialIcon x:Name="selectionIcon"
-                                   Grid.Column="0"
-                                   Margin="12"
-                                   HeightRequest="24"
-                                   HorizontalOptions="Center"
-                                   InputTransparent="True"
-                                   VerticalOptions="Center"
-                                   WidthRequest="24" />
-            <material:MaterialLabel x:Name="selectionText"
-                                    Grid.Column="1"
-                                    Margin="0,16"
-                                    HorizontalOptions="FillAndExpand"
-                                    InputTransparent="True"
-                                    TextColor="#DE000000"
-                                    TypeScale="Body1"
-                                    LineHeight="1"
-                                    VerticalOptions="Center"
-                                    WidthRequest="1000">
+            <material:MaterialButton
+                x:Name="selectionButton"
+                Grid.ColumnSpan="2"
+                Margin="-6"
+                ButtonType="Text"
+                CornerRadius="0"
+                HeightRequest="24"
+                HorizontalOptions="FillAndExpand"
+                IsVisible="{Binding Source={x:Reference selectionText}, Path=IsVisible}"
+                Text="{x:Null}"
+                WidthRequest="24" />
+            <material:MaterialButton
+                x:Name="iconButton"
+                Grid.Column="0"
+                ButtonType="Text"
+                CornerRadius="18"
+                HorizontalOptions="Center"
+                Text="{x:Null}"
+                VerticalOptions="Center"
+                WidthRequest="48" />
+            <material:MaterialIcon
+                x:Name="selectionIcon"
+                Grid.Column="0"
+                Margin="12"
+                HeightRequest="24"
+                HorizontalOptions="Center"
+                InputTransparent="True"
+                VerticalOptions="Center"
+                WidthRequest="24" />
+            <material:MaterialLabel
+                x:Name="selectionText"
+                Grid.Column="1"
+                Margin="0,16"
+                HorizontalOptions="FillAndExpand"
+                InputTransparent="True"
+                TextColor="{DynamicResource second_fg}"
+                TypeScale="Body1"
+                LineHeight="1"
+                VerticalOptions="Center"
+                WidthRequest="1000">
                 <Label.Triggers>
                     <Trigger TargetType="Label" Property="Text" Value="{x:Null}">
                         <Setter Property="IsVisible" Value="False" />

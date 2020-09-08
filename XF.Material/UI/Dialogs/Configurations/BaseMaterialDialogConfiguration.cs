@@ -15,6 +15,6 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the message text color of the dialog.
         /// </summary>
-        public virtual Color MessageTextColor { get; set; } = Color.FromHex("#99000000");
+        public virtual Color MessageTextColor { get; set; } = (Color)Application.Current.Resources["fg"];
     }
 }

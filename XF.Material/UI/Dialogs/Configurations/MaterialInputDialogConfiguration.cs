@@ -16,7 +16,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the color of the textfield's placeholder.
         /// </summary>
-        public Color InputPlaceholderColor { get; set; } = Color.FromHex("#99000000");
+        public Color InputPlaceholderColor { get; set; } = (Color)Application.Current.Resources["second_fg"];
 
         /// <summary>
         /// Gets or sets the font family of the textfield's placeholder.
@@ -26,7 +26,7 @@ namespace XF.Material.Forms.UI.Dialogs.Configurations
         /// <summary>
         /// Gets or sets the color of the textfield's text.
         /// </summary>
-        public Color InputTextColor { get; set; } = Color.FromHex("#D0000000");
+        public Color InputTextColor { get; set; } = (Color)Application.Current.Resources["fg"];
 
         /// <summary>
         /// Gets or sets the font family of the textfield's text.
