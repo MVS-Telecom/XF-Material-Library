@@ -14,7 +14,7 @@
 
         <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
 
-            <ui:MaterialCard HasShadow="False" Elevation="0" Margin="0" Padding="0" CornerRadius="0"  ExtendedCornerRadius="16,16,0,0" BackgroundColor="{DynamicResource bg}">
+            <ui:MaterialCard HasShadow="False" Elevation="0" Margin="0" Padding="0" CornerRadius="0"  ExtendedCornerRadius="16,16,0,0" BackgroundColor="{DynamicResource second_bg}">
 
 
                 <StackLayout x:Name="Container" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
@@ -67,10 +67,7 @@
                     </ui:MaterialCard>
 
                     <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
-                    <StackLayout x:Name="systemPadding">
-                        <StackLayout.BackgroundColor>
-                            <OnPlatform x:TypeArguments="Color" iOS="Transparent" Android="White" />
-                        </StackLayout.BackgroundColor>
+                    <StackLayout x:Name="systemPadding" BackgroundColor="{DynamicResource second_bg}">
                     </StackLayout>
 
                 </StackLayout>

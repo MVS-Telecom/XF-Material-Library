@@ -84,7 +84,7 @@ namespace XF.Material.Forms.UI.Dialogs
                 _radioButtonGroup = new MaterialRadioButtonGroup
                 {
                     HorizontalSpacing = 20,
-                    Choices = choices ?? throw new ArgumentNullException(nameof(choices)),
+                    Choices = choices ?? throw new ArgumentNullException(nameof(choices))
                 }
             };
 
@@ -115,8 +115,7 @@ namespace XF.Material.Forms.UI.Dialogs
                 {
                     HorizontalSpacing = 20,
                     Choices = choices ?? throw new ArgumentNullException(nameof(choices)),
-                    SelectedIndex = selectedIndex,
-                    UnselectedColor = (Color)Application.Current.Resources["second_fg"]
+                    SelectedIndex = selectedIndex
                 }
             };
 
@@ -147,8 +146,7 @@ namespace XF.Material.Forms.UI.Dialogs
                 _checkboxGroup = new MaterialCheckboxGroup
                 {
                     HorizontalSpacing = 20,
-                    Choices = choices ?? throw new ArgumentNullException(nameof(choices)),
-                    UnselectedColor = (Color)Application.Current.Resources["second_fg"]
+                    Choices = choices ?? throw new ArgumentNullException(nameof(choices))
                 }
             };
 

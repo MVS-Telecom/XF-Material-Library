@@ -46,7 +46,7 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// Backing field for the bindable property <see cref="TextColor"/>.
         /// </summary>
-        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseMaterialSelectionControl), Color.FromHex("#DE000000"));
+        public static readonly BindableProperty TextColorProperty = BindableProperty.Create(nameof(TextColor), typeof(Color), typeof(BaseMaterialSelectionControl), Material.Color.OnBackground);
 
         /// <summary>
         /// Backing field for the bindable property <see cref="Text"/>.
@@ -61,7 +61,7 @@ namespace XF.Material.Forms.UI.Internals
         /// <summary>
         /// Backing field for the bindable property <see cref="UnselectedColor"/>.
         /// </summary>
-        public static readonly BindableProperty UnselectedColorProperty = BindableProperty.Create(nameof(UnselectedColor), typeof(Color), typeof(BaseMaterialSelectionControl), Color.FromHex("#84000000"));
+        public static readonly BindableProperty UnselectedColorProperty = BindableProperty.Create(nameof(UnselectedColor), typeof(Color), typeof(BaseMaterialSelectionControl), Material.Color.OnSurface);
 
         /// <summary>
         /// Backing field for the bindable property <see cref="VerticalSpacing"/>.

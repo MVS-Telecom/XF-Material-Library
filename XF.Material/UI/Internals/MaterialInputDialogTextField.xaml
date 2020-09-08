@@ -22,7 +22,7 @@
             <material:MaterialCard x:Name="backgroundCard"
                 Grid.Row="0"
                 Grid.ColumnSpan="3"
-                BackgroundColor="#DCDCDC"
+                BackgroundColor="{DynamicResource second_bg}"
                 CornerRadius="4"
                 Elevation="0" />
             <material:MaterialIcon x:Name="icon"
@@ -43,7 +43,7 @@
                 HeightRequest="20"
                 InputTransparent="True"
                 Text="Placeholder"
-                TextColor="#99000000"
+                TextColor="{DynamicResource second_fg}"
                 VerticalOptions="End"
                 VerticalTextAlignment="Center" />
             <internal:MaterialEntry x:Name="entry"
@@ -51,12 +51,12 @@
                 Grid.Column="1"
                 Grid.ColumnSpan="2"
                 Margin="0,24,12,12"
-                BackgroundColor="Transparent"
                 FontFamily="{DynamicResource Material.FontFamily.Body2}"
                 FontSize="16"
                 HeightRequest="20"
                 HorizontalOptions="FillAndExpand"
-                TextColor="#D0000000"
+                BackgroundColor="{DynamicResource bg}"          
+                TextColor="{DynamicResource fg}"
                 VerticalOptions="End">
                 <internal:MaterialEntry.Triggers>
                     <DataTrigger Binding="{Binding Source={x:Reference errorIcon}, Path=IsVisible}"
@@ -105,7 +105,7 @@
                 Grid.ColumnSpan="3"
                 Margin="12,2,12,0"
                 Style="{DynamicResource Material.TypeScale.Caption}"
-                TextColor="#99000000"
+                TextColor="{DynamicResource second_fg}"
                 VerticalOptions="End"
                 VerticalTextAlignment="End">
                 <Label.Triggers>
@@ -128,7 +128,7 @@
                 Margin="0,2,12,0"
                 HorizontalOptions="End"
                 Style="{DynamicResource Material.TypeScale.Caption}"
-                TextColor="#99000000"
+                TextColor="{DynamicResource fg}"
                 VerticalOptions="End">
                 <Label.Triggers>
                     <Trigger TargetType="Label" Property="Text" Value="">

@@ -15,7 +15,7 @@
 
         <ScrollView Padding="0" Margin="0" VerticalOptions="End" BackgroundColor="Transparent">
 
-            <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" BackgroundColor="{DynamicResource bg}" ExtendedCornerRadius="16,16,0,0" Margin="0" Padding="0">
+            <ui:MaterialCard HasShadow="True" Elevation="6" CornerRadius="0" BackgroundColor="{DynamicResource second_bg}" ExtendedCornerRadius="16,16,0,0" Margin="0" Padding="0">
                 <StackLayout x:Name="Container" VerticalOptions="End" BackgroundColor="Transparent">
 
                     <Frame x:Name="DragAnchor" HasShadow="False" IsVisible="False" IsEnabled="True" Padding="0,12,0,8" BackgroundColor="Transparent" HorizontalOptions="FillAndExpand">
@@ -86,7 +86,7 @@
 
 
                     <!--Чтобы диалог был выше навигаэшн бара на Android и "брови" на iOS-->
-                    <StackLayout x:Name="systemPadding" BackgroundColor="{DynamicResource bg}">
+                    <StackLayout x:Name="systemPadding" BackgroundColor="{DynamicResource second_bg}">
 
                     </StackLayout>
 

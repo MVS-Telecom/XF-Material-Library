@@ -10,7 +10,7 @@
             x:Name="Container"
             Margin="{DynamicResource Material.Dialog.Margin}"
             Padding="0"
-            BackgroundColor="{DynamicResource bg}"
+            BackgroundColor="{DynamicResource second_bg}"
             CornerRadius="4"
             Elevation="24"
             HasShadow="True"

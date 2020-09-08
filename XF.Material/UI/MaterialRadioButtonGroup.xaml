@@ -20,8 +20,8 @@
                         SelectedChangeCommand="{Binding SelectedChangeCommand}"
                         SelectedColor="{Binding Source={x:Reference root}, Path=SelectedColor}"
                         FormattedText="{Binding Text}"
-                        TextColor="{Binding Source={x:Reference root}, Path=TextColor}"
-                        UnselectedColor="{Binding Source={x:Reference root}, Path=UnselectedColor}"
+                        TextColor="{DynamicResource fg}"
+                        UnselectedColor="{DynamicResource second_fg}"
                         VerticalSpacing="{Binding Source={x:Reference root}, Path=VerticalSpacing}" />
                 </DataTemplate>
             </BindableLayout.ItemTemplate>

@@ -28,6 +28,7 @@
                 HeightRequest="24"
                 HorizontalOptions="FillAndExpand"
                 IsVisible="{Binding Source={x:Reference selectionText}, Path=IsVisible}"
+                TextColor="{DynamicResource fg}"
                 Text="{x:Null}"
                 WidthRequest="24" />
             <material:MaterialButton
@@ -37,6 +38,7 @@
                 CornerRadius="18"
                 HorizontalOptions="Center"
                 Text="{x:Null}"
+                TextColor="{DynamicResource fg}"
                 VerticalOptions="Center"
                 WidthRequest="48" />
             <material:MaterialIcon

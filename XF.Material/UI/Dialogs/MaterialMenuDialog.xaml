@@ -9,7 +9,7 @@
     <ContentPage.Content>
         <material:MaterialCard x:Name="Container"
                                Padding="0,8,0,8"
-                               BackgroundColor="{DynamicResource bg}"
+                               BackgroundColor="{DynamicResource second_bg}"
                                CornerRadius="4"
                                Elevation="8"
                                HasShadow="False"
