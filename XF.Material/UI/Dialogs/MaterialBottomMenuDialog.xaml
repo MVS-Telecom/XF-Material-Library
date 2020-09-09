@@ -49,13 +49,13 @@
 
                         </ui:MaterialLabel>
 
-                        <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{StaticResource BottomSheet_IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
+                        <ui:MaterialCard x:Name="Close" IsClickable="True" CornerRadius="18" BackgroundColor="{DynamicResource BottomSheet_IconBackground}" Padding="7" Margin="0" Elevation="0" HasShadow="False" VerticalOptions="Center" HorizontalOptions="EndAndExpand">
 
                             <ui:MaterialIcon  
                                 WidthRequest="24" 
                                 HeightRequest="24"
                                 Source="ic_close_24dp" 
-                                TintColor="{StaticResource BottomSheet_IconTint}" />
+                                TintColor="{DynamicResource BottomSheet_IconTint}" />
 
                         </ui:MaterialCard>
 

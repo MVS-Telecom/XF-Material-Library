@@ -8,16 +8,17 @@
                              BackgroundColor="#51000000"
                              CloseWhenBackgroundIsClicked="False">
     <ContentPage.Content>
-        <material:MaterialCard x:Name="Container"
-                               Margin="{DynamicResource Material.Dialog.Margin}"
-                               Padding="0"
-                               BackgroundColor="{DynamicResource second_bg}"
-                               CornerRadius="6"
-                               Elevation="24"
-                               HasShadow="True"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center"
-                               WidthRequest="{StaticResource Material.Dialog.Width}">
+        <material:MaterialCard
+            x:Name="Container"
+            Margin="{DynamicResource Material.Dialog.Margin}"
+            Padding="0"
+            BackgroundColor="{DynamicResource second_bg}"
+            CornerRadius="6"
+            Elevation="24"
+            HasShadow="True"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="{StaticResource Material.Dialog.Width}">
             <Grid Margin="16,20"
                   ColumnSpacing="8">
                 <Grid.ColumnDefinitions>
@@ -28,32 +29,35 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <ActivityIndicator x:Name="loading" 
-                                   IsRunning="true"
-                                   Grid.Column="0"
-                                   HeightRequest="34"
-                                   VerticalOptions="Center"
-                                   Color="{StaticResource Material.Color.Primary}"
-                                   WidthRequest="34" />
+                <ActivityIndicator
+                    x:Name="loading" 
+                    IsRunning="true"
+                    Grid.Column="0"
+                    HeightRequest="34"
+                    VerticalOptions="Center"
+                    Color="{DynamicResource Material.Color.Primary}"
+                    WidthRequest="34" />
 
-                <controls:MaterialCircleProgressView x:Name="progress" 
-                                             WidthRequest="28"  
-                                             HeightRequest="28"
-                                             IsVisible="False"
-                                             Grid.Column="0" 
-                                             VerticalOptions="Center"
-                                             HorizontalOptions="Center"    
-                                             Animate="True"
-                                             Stroke="{OnPlatform Android=8, iOS=6}"
-                                             Color="{StaticResource Material.Color.Primary}" />
+                <controls:MaterialCircleProgressView
+                    x:Name="progress" 
+                    WidthRequest="28"  
+                    HeightRequest="28"
+                    IsVisible="False"
+                    Grid.Column="0" 
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"    
+                    Animate="True"
+                    Stroke="{OnPlatform Android=8, iOS=6}"
+                    Color="{DynamicResource Material.Color.Primary}" />
 
-                <material:MaterialLabel x:Name="Message"
-                                        Grid.Column="1"
-                                        Text="Lorem ipsum dolor sit amet."
-                                        TextColor="#99000000"
-                                        TypeScale="Body1"
-                                        LineHeight="1"
-                                        VerticalOptions="Center" />
+                <material:MaterialLabel
+                    x:Name="Message"
+                    Grid.Column="1"
+                    Text="Lorem ipsum dolor sit amet."
+                    TextColor="{DynamicResource fg}"
+                    TypeScale="Body1"
+                    LineHeight="1"
+                    VerticalOptions="Center" />
             </Grid>
         </material:MaterialCard>
     </ContentPage.Content>
