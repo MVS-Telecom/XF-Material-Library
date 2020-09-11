@@ -111,7 +111,7 @@ namespace XF.Material.Forms.UI.Dialogs
                 return;
             }
 
-            BackgroundColor = preferredConfig.ScrimColor;
+            BackgroundColor = ((Color)Application.Current.Resources["bg"]).MultiplyAlpha(0.5);
             Container.CornerRadius = preferredConfig.CornerRadius;
             Container.BackgroundColor = preferredConfig.BackgroundColor;
             Message.TextColor = preferredConfig.MessageTextColor;
