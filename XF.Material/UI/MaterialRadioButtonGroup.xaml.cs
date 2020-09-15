@@ -77,12 +77,12 @@ namespace XF.Material.Forms.UI
             for (var i = 0; i < Choices.Count; i++)
             {
                 var text = new FormattedString();
-                text.Spans.Add(new Span() { Text = Choices[i].Text, LineHeight = 1 });
+                text.Spans.Add(new Span() { Text = Choices[i].Text, TextColor = (Color)Application.Current.Resources["fg"], LineHeight = 1 });
 
                 if (!string.IsNullOrEmpty(Choices[i].Description))
                 {
                     text.Spans.Add(new Span() { Text = Environment.NewLine, LineHeight = 1 });
-                    text.Spans.Add(new Span() { Text = Choices[i].Description, FontSize = 13, TextColor = Color.Gray, LineHeight = 1 });
+                    text.Spans.Add(new Span() { Text = Choices[i].Description, FontSize = 13, TextColor = (Color)Application.Current.Resources["second_fg"], LineHeight = 1 });
                 }
 
                 var model = new MaterialSelectionControlModel
