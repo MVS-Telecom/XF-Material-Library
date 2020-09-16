@@ -97,6 +97,7 @@ namespace XF.Material.Forms.UI
             set => SetValue(PressedBackgroundColorProperty, value);
         }
 
+
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             if (_colorPropertyNames.Contains(propertyName))
@@ -110,6 +111,7 @@ namespace XF.Material.Forms.UI
                 switch (propertyName)
                 {
                     case nameof(ButtonType):
+                    case nameof(BorderColor):
                         ButtonTypeChanged(ButtonType);
                         break;
                     case nameof(Style):
@@ -134,11 +136,17 @@ namespace XF.Material.Forms.UI
             });
         }
 
+
         private void ButtonTypeChanged(MaterialButtonType buttonType)
         {
             if (buttonType == MaterialButtonType.Outlined && BorderColor.IsDefault)
             {
                 BorderColor = OutlinedBorderColor;
+            }
+
+            if (buttonType == MaterialButtonType.Outlined)
+            {
+                BorderColor = new Color(BorderColor.R, BorderColor.G, BorderColor.B, 0.5d);
             }
 
             if (buttonType == MaterialButtonType.Outlined && BorderWidth == (double)BorderWidthProperty.DefaultValue)
