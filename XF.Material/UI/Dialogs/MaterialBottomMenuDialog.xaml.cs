@@ -31,6 +31,11 @@ namespace XF.Material.UI.Dialogs
         public string Title { get; set; }
 
         /// <summary>
+        /// 
+        /// </summary>
+        public string Subtitle { get; set; }
+
+        /// <summary>
         /// Имя иконки
         /// </summary>
         public string IconSource { get; set; }
@@ -158,6 +163,15 @@ namespace XF.Material.UI.Dialogs
 
                 #region Текст
 
+                var t = new FormattedString();
+                t.Spans.Add(new Span() { Text = x.Title });
+
+                if (!string.IsNullOrEmpty(x.Subtitle))
+                {
+                    t.Spans.Add(new Span() { Text = Environment.NewLine });
+                    t.Spans.Add(new Span() { Text = x.Subtitle, FontSize = 14, TextColor = (Color)Application.Current.Resources["second_fg"] });
+                }
+
                 view.Children.Add(new MaterialLabel()
                 {
                     Padding = new Thickness(10, 5),
@@ -166,7 +180,7 @@ namespace XF.Material.UI.Dialogs
                     //TypeScale = MaterialTypeScale.Body1,
                     TextColor = (Color)Application.Current.Resources["fg"],
                     //FontAttributes = FontAttributes.Bold,
-                    Text = x.Title,
+                    FormattedText = t,
                     LineHeight = 1,
                     VerticalOptions = LayoutOptions.Center
                 });
