@@ -164,13 +164,16 @@ namespace XF.Material.UI.Dialogs
                 #region Текст
 
                 var t = new FormattedString();
-                t.Spans.Add(new Span() { Text = x.Title });
+
+                if (!string.IsNullOrEmpty(x.Title))
+                    t.Spans.Add(new Span() { Text = x.Title });
+
+                if (!string.IsNullOrEmpty(x.Title) && !string.IsNullOrEmpty(x.Subtitle))
+                    t.Spans.Add(new Span() { Text = Environment.NewLine });
 
                 if (!string.IsNullOrEmpty(x.Subtitle))
-                {
-                    t.Spans.Add(new Span() { Text = Environment.NewLine });
                     t.Spans.Add(new Span() { Text = x.Subtitle, FontSize = 14, TextColor = (Color)Application.Current.Resources["second_fg"] });
-                }
+
 
                 view.Children.Add(new MaterialLabel()
                 {
