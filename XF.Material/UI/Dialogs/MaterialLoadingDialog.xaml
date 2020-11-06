@@ -46,7 +46,7 @@
                     VerticalOptions="Center"
                     HorizontalOptions="Center"    
                     Spin="True"
-                    Stroke="{OnPlatform Android=8, iOS=6}"
+                    Stroke="7"
                     Color="{DynamicResource Material.Color.Primary}" />
 
                 <material:MaterialLabel
