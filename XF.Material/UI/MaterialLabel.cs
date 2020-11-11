@@ -96,9 +96,12 @@ namespace XF.Material.Forms.UI
             {
                 case MaterialTypeScale.H6:
                 case MaterialTypeScale.Subtitle2:
-                case MaterialTypeScale.Button:
                     FontAttributes = Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None;
                     FontFamily = Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : null;
+                    break;
+                case MaterialTypeScale.Button:
+                    FontAttributes = FontAttributes.Bold;
+                    FontFamily = null;
                     break;
             }
         }
