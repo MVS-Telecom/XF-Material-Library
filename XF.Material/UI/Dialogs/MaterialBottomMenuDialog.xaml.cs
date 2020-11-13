@@ -103,7 +103,7 @@ namespace XF.Material.UI.Dialogs
                     CornerRadius = 0,
                     Elevation = 0,
                     IsClickable = true,
-                    Padding = new Thickness(8, 8),
+                    Padding = new Thickness(8, 5),
                     Margin = new Thickness(0),
                 };
 
@@ -121,7 +121,7 @@ namespace XF.Material.UI.Dialogs
 
                 var view = new StackLayout();
                 view.Orientation = StackOrientation.Horizontal;
-
+                view.Spacing = 2;
                 view.VerticalOptions = LayoutOptions.Center;
                 view.Padding = new Thickness(2, 1, 2, 1);
 
@@ -166,20 +166,25 @@ namespace XF.Material.UI.Dialogs
                 var t = new FormattedString();
 
                 if (!string.IsNullOrEmpty(x.Title))
-                    t.Spans.Add(new Span() { Text = x.Title });
+                    t.Spans.Add(new Span()
+                    {
+                        Text = x.Title,
+                        FontAttributes = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None,
+                        FontFamily = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : null
+                    });
 
                 if (!string.IsNullOrEmpty(x.Title) && !string.IsNullOrEmpty(x.Subtitle))
                     t.Spans.Add(new Span() { Text = Environment.NewLine });
 
                 if (!string.IsNullOrEmpty(x.Subtitle))
-                    t.Spans.Add(new Span() { Text = x.Subtitle, FontSize = 14, TextColor = (Color)Application.Current.Resources["second_fg"] });
+                    t.Spans.Add(new Span() { Text = x.Subtitle, FontSize = 14.5, TextColor = (Color)Application.Current.Resources["second_fg"] });
 
 
                 view.Children.Add(new MaterialLabel()
                 {
                     Padding = new Thickness(10, 5),
                     TypeScale = MaterialTypeScale.Body1,
-                    //FontSize = 17,
+                    FontSize = 17,
                     //TypeScale = MaterialTypeScale.Body1,
                     TextColor = (Color)Application.Current.Resources["fg"],
                     //FontAttributes = FontAttributes.Bold,
