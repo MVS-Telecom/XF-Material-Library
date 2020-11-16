@@ -169,8 +169,9 @@ namespace XF.Material.UI.Dialogs
                     t.Spans.Add(new Span()
                     {
                         Text = x.Title,
-                        FontAttributes = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None,
-                        FontFamily = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : null
+                        FontSize = 16,
+                        //FontAttributes = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None,
+                        //FontFamily = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : null
                     });
 
                 if (!string.IsNullOrEmpty(x.Title) && !string.IsNullOrEmpty(x.Subtitle))
@@ -184,7 +185,7 @@ namespace XF.Material.UI.Dialogs
                 {
                     Padding = new Thickness(10, 5),
                     TypeScale = MaterialTypeScale.Body1,
-                    FontSize = 17,
+                    FontSize = 16,
                     //TypeScale = MaterialTypeScale.Body1,
                     TextColor = (Color)Application.Current.Resources["fg"],
                     //FontAttributes = FontAttributes.Bold,
