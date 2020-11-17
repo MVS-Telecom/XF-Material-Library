@@ -269,6 +269,7 @@ namespace XF.Material.UI.Dialogs
             {
                 Close.ClickCommand = null;
                 ok = false;
+                ClosedManually = true;
                 await DismissAsync();
             });
 
@@ -287,7 +288,8 @@ namespace XF.Material.UI.Dialogs
             //};
         }
 
-        bool ok = false;
+        public bool ClosedManually { get; private set; } = false;
+        private bool ok = false;
 
         private async void Instance_Popping(object sender, Rg.Plugins.Popup.Events.PopupNavigationEventArgs e)
         {
