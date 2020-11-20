@@ -22,5 +22,10 @@ namespace XF.Material.Forms.UI.Dialogs
         /// 
         /// </summary>
         double Progress { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        string Text { get; set; }
     }
 }

@@ -10,6 +10,9 @@ namespace XF.Material.Forms.UI.Dialogs
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MaterialLoadingDialog : BaseMaterialModalPage, IMaterialLoadingModalPage
     {
+        /// <summary>
+        /// 
+        /// </summary>
         public double Progress
         {
             get
@@ -25,6 +28,21 @@ namespace XF.Material.Forms.UI.Dialogs
                     throw new InvalidOperationException();
 
                 progress.Progress = value;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string Text
+        {
+            get
+            {
+                return Message.Text;
+            }
+            set
+            {
+                Message.Text = value;
             }
         }
 
