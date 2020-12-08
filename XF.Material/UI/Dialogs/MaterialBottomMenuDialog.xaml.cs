@@ -103,7 +103,7 @@ namespace XF.Material.UI.Dialogs
                     CornerRadius = 0,
                     Elevation = 0,
                     IsClickable = true,
-                    Padding = new Thickness(8, 5),
+                    Padding = new Thickness(8, 2),
                     Margin = new Thickness(0),
                 };
 
