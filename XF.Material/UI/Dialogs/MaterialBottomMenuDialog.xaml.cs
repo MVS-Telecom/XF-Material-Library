@@ -30,6 +30,17 @@ namespace XF.Material.UI.Dialogs
         /// </summary>
         public string Title { get; set; }
 
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public FontAttributes? TitleFontAttributes { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public string TitleFontFamily { get; set; }
+
         /// <summary>
         /// 
         /// </summary>
@@ -138,7 +149,7 @@ namespace XF.Material.UI.Dialogs
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         Source = x.IconSource,
-                        Opacity = x.IconOpacity ?? 0.9f,
+                        Opacity = x.IconOpacity ?? 1f,
                     };
 
                     if (!x.IgnoreTint)
@@ -153,7 +164,7 @@ namespace XF.Material.UI.Dialogs
                         Margin = 0,
                         Padding = new Thickness(0),
                         VerticalOptions = LayoutOptions.Center,
-                        BackgroundColor = (Color)Application.Current.Resources["BottomSheet_IconBackground"],
+                        BackgroundColor = x.IconTint?.MultiplyAlpha(0.075) ?? (Color)Application.Current.Resources["BottomSheet_IconBackground"],
                         Content = icon
                     });
                 }
@@ -170,8 +181,8 @@ namespace XF.Material.UI.Dialogs
                     {
                         Text = x.Title,
                         FontSize = 16,
-                        //FontAttributes = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None,
-                        //FontFamily = !string.IsNullOrEmpty(x.Subtitle) && Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : null
+                        FontAttributes = x.TitleFontAttributes ?? FontAttributes.None,
+                        FontFamily = x.TitleFontFamily ?? null
                     });
 
                 if (!string.IsNullOrEmpty(x.Title) && !string.IsNullOrEmpty(x.Subtitle))
