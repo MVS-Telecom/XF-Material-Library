@@ -3,7 +3,7 @@ using XF.Material.Forms.Resources;
 
 namespace XF.Material.Forms.UI
 {
-    public class MaterialCircularLoadingView : Lottie.Forms.AnimationView
+    public class MaterialCircularLoadingView : ContentView
     {
         /// <summary>
         /// Default value for Width and Height if none are specified after object creation
@@ -25,7 +25,6 @@ namespace XF.Material.Forms.UI
         public MaterialCircularLoadingView()
         {
             SetDynamicResource(TintColorProperty, MaterialConstants.Color.SECONDARY);
-            Loop = true;
 
             HorizontalOptions = DefaultStretchBehavior;
             VerticalOptions = DefaultStretchBehavior;
