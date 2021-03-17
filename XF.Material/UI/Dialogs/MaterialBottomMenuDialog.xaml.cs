@@ -75,6 +75,34 @@ namespace XF.Material.UI.Dialogs
         /// 
         /// </summary>
         public double? OverrideIconSize { get; set; }
+
+        private bool? isBold = null;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public bool? IsBold
+        {
+            get
+            {
+                return isBold;
+            }
+            set
+            {
+                isBold = value;
+
+                if (isBold == true)
+                {
+                    TitleFontFamily = Device.RuntimePlatform == Device.Android ? "sans-serif-medium" : "";
+                    TitleFontAttributes = Device.RuntimePlatform == Device.iOS ? FontAttributes.Bold : FontAttributes.None;
+                }
+                else
+                {
+                    TitleFontFamily = "";
+                    TitleFontAttributes = FontAttributes.None;
+                }
+            }
+        }
     }
 
 
