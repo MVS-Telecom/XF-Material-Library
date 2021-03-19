@@ -94,10 +94,6 @@ namespace XF.Material.iOS.Renderers
         {
             base.OnElementPropertyChanged(sender, e);
 
-            if (e?.PropertyName == nameof(MaterialCard.Elevation) || e?.PropertyName == nameof(VisualElement.BackgroundColor))
-            {
-                this.Elevate(_materialCard.Elevation);
-            }
 
             switch (e?.PropertyName)
             {
@@ -109,6 +105,12 @@ namespace XF.Material.iOS.Renderers
                     SetIsClickable();
                     this.Elevate(_materialCard.Elevation);
                     break;
+
+                case nameof(MaterialCard.Elevation):
+                case nameof(MaterialCard.IsVisible):
+                    this.Elevate(_materialCard.Elevation);
+                    break;
+
                 case nameof(MaterialCard.IsClickable):
                     SetIsClickable();
                     break;
