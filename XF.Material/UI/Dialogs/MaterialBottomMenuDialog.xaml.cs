@@ -158,9 +158,10 @@ namespace XF.Material.UI.Dialogs
                     };
                 }
 
-                var view = new StackLayout();
-                view.Orientation = StackOrientation.Horizontal;
-                view.Spacing = 2;
+                var view = new Grid();
+                view.ColumnDefinitions.Add(new ColumnDefinition() { Width = 48 });
+                view.ColumnDefinitions.Add(new ColumnDefinition() { Width = GridLength.Star });
+                view.ColumnSpacing = 2;
                 view.VerticalOptions = LayoutOptions.Center;
                 view.Padding = new Thickness(2, 1, 2, 1);
 
@@ -192,9 +193,11 @@ namespace XF.Material.UI.Dialogs
                         Margin = 0,
                         Padding = new Thickness(0),
                         VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Start,
                         BackgroundColor = x.IconTint?.MultiplyAlpha(0.075) ?? (Color)Application.Current.Resources["BottomSheet_IconBackground"],
                         Content = icon
                     });
+
                 }
 
                 #endregion
@@ -220,7 +223,7 @@ namespace XF.Material.UI.Dialogs
                     t.Spans.Add(new Span() { Text = x.Subtitle, FontSize = 14.5, TextColor = (Color)Application.Current.Resources["second_fg"] });
 
 
-                view.Children.Add(new MaterialLabel()
+                var label = new MaterialLabel()
                 {
                     Padding = new Thickness(10, 5),
                     TypeScale = MaterialTypeScale.Body1,
@@ -230,8 +233,14 @@ namespace XF.Material.UI.Dialogs
                     //FontAttributes = FontAttributes.Bold,
                     FormattedText = t,
                     LineHeight = 1,
+                    LineBreakMode = LineBreakMode.WordWrap,
+                    HorizontalOptions = LayoutOptions.Start,
                     VerticalOptions = LayoutOptions.Center
-                });
+                };
+
+                view.Children.Add(label);
+
+                Grid.SetColumn(label, 1);
 
                 #endregion
 
