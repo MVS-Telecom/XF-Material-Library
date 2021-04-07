@@ -172,8 +172,8 @@ namespace XF.Material.UI.Dialogs
 
                     var icon = new MaterialIcon()
                     {
-                        WidthRequest = x.OverrideIconSize ?? 21,
-                        HeightRequest = x.OverrideIconSize ?? 21,
+                        WidthRequest = MinimumWidthRequest = x.OverrideIconSize ?? 21,
+                        HeightRequest = MinimumHeightRequest = x.OverrideIconSize ?? 21,
                         VerticalOptions = LayoutOptions.Center,
                         HorizontalOptions = LayoutOptions.Center,
                         Source = x.IconSource,
@@ -185,8 +185,8 @@ namespace XF.Material.UI.Dialogs
 
                     view.Children.Add(new MaterialCard()
                     {
-                        WidthRequest = 48,
-                        HeightRequest = 48,
+                        WidthRequest = MinimumWidthRequest = 48,
+                        HeightRequest = MinimumHeightRequest = 48,
                         Elevation = 0,
                         CornerRadius = 25,
                         Margin = 0,
