@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -100,24 +102,32 @@ namespace XF.Material.Forms.UI
 
         protected override void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            if (_colorPropertyNames.Contains(propertyName))
+            try
             {
-                base.OnPropertyChanged(MaterialButtonColorChanged);
-            }
-            else
-            {
-                base.OnPropertyChanged(propertyName);
-
-                switch (propertyName)
+                if (_colorPropertyNames.Contains(propertyName))
                 {
-                    case nameof(ButtonType):
-                    case nameof(BorderColor):
-                        ButtonTypeChanged(ButtonType);
-                        break;
-                    case nameof(Style):
-                        SetStyleValues(Style);
-                        break;
+                    base.OnPropertyChanged(MaterialButtonColorChanged);
                 }
+                else
+                {
+                    base.OnPropertyChanged(propertyName);
+
+                    switch (propertyName)
+                    {
+                        case nameof(ButtonType):
+                        case nameof(BorderColor):
+                            ButtonTypeChanged(ButtonType);
+                            break;
+                        case nameof(Style):
+                            SetStyleValues(Style);
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                Debugger.Break();
             }
         }
 
