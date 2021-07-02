@@ -240,7 +240,7 @@ namespace XF.Material.UI.Dialogs
 
                 try
                 {
-                    if (await onAction())
+                    if (onAction == null || await onAction())
                     {
                         ok = true;
                         await DismissAsync();
