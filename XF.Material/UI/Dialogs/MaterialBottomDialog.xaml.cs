@@ -223,6 +223,11 @@ namespace XF.Material.UI.Dialogs
             if (string.IsNullOrEmpty(actionText))
                 actionText = "DONE";// app.GetString("common_done");
 
+            if (Application.Current.Resources.TryGetValue("BottomSheet_ActionButtonTextColor", out object color))
+                text.TextColor = (Color)color;
+            else
+                text.TextColor = (Color)Application.Current.Resources["fg"];
+
             text.Text = actionText.ToUpper();
             //ActionButton.IsVisible = !string.IsNullOrEmpty(text.Text);
 
